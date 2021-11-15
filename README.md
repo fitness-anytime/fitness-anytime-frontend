@@ -10,7 +10,7 @@ Instructors can take attendance, request and process payments, create virtual â€
 
 ## Table of contents
 
-- [Overview](#overview)
+- [Overview] https://www.figma.com/file/CSRiehufvZeC8xhpbBVMxj/Untitled?node-id=0%3A1
   - [The App](#the-app)
   - [Screenshot](#screenshot)
   - [Links](#links)
