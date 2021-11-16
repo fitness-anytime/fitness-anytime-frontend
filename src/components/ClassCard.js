@@ -63,10 +63,10 @@ export default function ClassCard(props) {
   return (
     <Card sx={{ maxWidth: 345, paddingBottom: "1rem" }}>
       <CardContent>
-        <Typography gutterBottom variant="h3" component="div">
+        <Typography gutterBottom variant="h4" component="div">
           {name}
         </Typography>
-        <Typography gutterBottom variant="h4" component="div">
+        <Typography gutterBottom variant="h5" component="div">
           {type}
         </Typography>
         <Typography variant="body2" color="text.secondary">
@@ -87,7 +87,12 @@ export default function ClassCard(props) {
             <Button size="small" variant="contained" style={buttonStyles}>
               Update
             </Button>
-            <Button size="small" variant="contained" style={buttonStyles}>
+            <Button
+              color="error"
+              size="small"
+              variant="contained"
+              style={buttonStyles}
+            >
               Delete
             </Button>
           </>
@@ -99,7 +104,12 @@ export default function ClassCard(props) {
             <Button size="small" variant="contained" style={buttonStyles}>
               Reschedule
             </Button>
-            <Button size="small" variant="contained" style={buttonStyles}>
+            <Button
+              color="error"
+              size="small"
+              variant="contained"
+              style={buttonStyles}
+            >
               Cancel Reservation
             </Button>
           </>

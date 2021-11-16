@@ -1,9 +1,11 @@
 import React from "react";
+import { FormControl, MenuItem, InputLabel, Select } from "@mui/material";
 
 export default function ClassForm() {
   return (
     <div>
       <form>
+        here is the create class from
         {/* 
           --Create Class Header--
 
@@ -16,6 +18,9 @@ export default function ClassForm() {
           --Max Capacity (dropdown?)--
 
           --Submit Form Button--
+
+
+          
         */}
       </form>
     </div>
