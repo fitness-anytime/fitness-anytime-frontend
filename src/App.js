@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import User from "./components/User.js";
 import Instructor from "./components/instructor/Instructor";
+import ClassForm from "./components/instructor/ClassForm";
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
         <Route exact path="/signup" element={<SignUp />} />
         <Route exact path="/user" element={<User />} />
         <Route exact path="/instructor" element={<Instructor />} />
+        <Route exact path="/class-form" element={<ClassForm />} />
+
       </Routes>
     </div>
   );
