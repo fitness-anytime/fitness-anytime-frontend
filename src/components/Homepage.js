@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import trainer from "../assets/personaltrainer.svg";
+import yoga from "../assets/yoga.svg";
+import { useNavigate } from "react-router-dom";
 
 const Div = styled.div`
-  background-color: #86a37a;
+  background-color: #a81616;
 
   height: 100%;
   min-height: 100vh;
@@ -38,7 +39,30 @@ const Intro = styled.div`
   }
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 5%;
+  margin-right: 30%;
+  min-width: 150px;
+  max-height: 50px;
+`;
+
+const Button = styled.button`
+  margin: 5px;
+  padding: 5px 40px;
+  color: #ffffff;
+  background-color: #000000;
+  border: 1px solid white;
+`;
+
+const Image = styled.img`
+  max-width: 40%;
+`;
+
 export default function Homepage() {
+  const navigate = useNavigate();
+
   return (
     <Div>
       <Intro>
@@ -58,7 +82,25 @@ export default function Homepage() {
       </Intro>
 
       <div className="image-container">
-        <img alt="personal trainer" src={trainer} />
+        <ButtonContainer>
+          <Button 
+            onClick={() => {
+              navigate("/Login");
+            }} 
+            value="Login" 
+          >
+            Login
+          </Button>
+          <Button 
+            onClick={() => {
+              navigate("/SignUp");
+            }} 
+            value="sign up"
+          >
+            Sign up
+          </Button>
+        </ButtonContainer>
+        <Image alt="yoga" src={yoga} />
       </div>
     </Div>
   );

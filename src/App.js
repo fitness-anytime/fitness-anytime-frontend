@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import NavBar from "./components/NavBar";
 
@@ -16,16 +16,16 @@ import Homepage from "./components/Homepage.js";
 function App() {
   localStorage.setItem("token", "adsfasd");
   // localStorage.removeItem("token");
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   return (
     <React.Fragment>
-      <NavBar />
+      <NavBar isLoggedIn={isLoggedIn} />
 
       <Routes>
         <Route exact path="/login" element={<Login />} />
-        <Route exact path="/signup" element={<SignUp />} />
 
-        {/* needs to be private */}
+        <Route exact path="/signup" element={<SignUp />} />
 
         <Route path="/user" element={<PrivateRoute />}>
           <Route path="/user" element={<User />} />
@@ -34,9 +34,6 @@ function App() {
         <Route exact path="/instructor" element={<PrivateRoute />}>
           <Route exact path="/instructor" element={<Instructor />} />
         </Route>
-        {/* needs to be private */}
-
-        {/* needs to be private */}
 
         <Route exact path="/createclass" element={<PrivateRoute />}>
           <Route exact path="/createclass" element={<ClassForm />} />

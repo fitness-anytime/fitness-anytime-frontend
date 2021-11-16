@@ -143,21 +143,20 @@ export default function Instructor(props) {
             <Typography variant="h3">
               Welcome, Instructor. Here Your Classes
             </Typography>
-            <Typography variant="p">
-              You have {classes.length} active classes
-            </Typography>
-
             <Button
               onClick={() => {
                 navigate("/createclass");
               }}
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 2, mb: 2 }}
             >
               New Class
               <ControlPointIcon />
             </Button>
+            <Typography variant="p">
+              You have <b> {classes.length} </b> active classes
+            </Typography>
           </div>
           <div className="instructor-cards-container">
             {classes.map((classData) => {

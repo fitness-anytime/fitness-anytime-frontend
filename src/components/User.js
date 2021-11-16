@@ -39,14 +39,17 @@ const classCards = [
 ];
 
 const StyledUserContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-
   .MuiCard-root {
     margin-right: 2rem;
     margin-left: 2rem;
     margin-top: 2rem;
+    flex-direction: column;
+  }
+
+  @media (min-width: 500px) {
+    .MuiCard-root {
+      flex-direction: row;
+    }
   }
 `;
 
@@ -62,7 +65,12 @@ export default function User() {
       */}
         {classes.map((classData) => {
           return (
-            <ClassCard key={classData.id} isInstructor={false} {...classData} />
+            <ClassCard
+              className="classCard"
+              key={classData.id}
+              isInstructor={false}
+              {...classData}
+            />
           );
         })}
       </StyledUserContainer>

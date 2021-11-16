@@ -2,3 +2,36 @@ body {
   margin: 0;
   padding: 0;
 }
+
+#root {
+  background-color: #a81616;
+
+  height: 100%;
+  min-height: 100vh;
+}
+
+button.MuiButton-root {
+  background-color: #000000;
+  color: #ffffff;
+  border: 1px solid white;
+}
+
+div a.MuiTypography-root {
+  color: white;
+}
+/* ToDo */
+/* label.Mui-focused {
+  color: white !important;
+}
+
+.Mui-focused fieldset {
+  border-color: white !important;
+} */
+
+@media (min-width: 401px) {
+  button.MuiButton-root {
+    padding: "0.5rem 1rem";
+    margin-top: "1rem";
+    width: "25%";
+  }
+}

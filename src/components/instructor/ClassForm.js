@@ -1,8 +1,20 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
+import React, { useState, useEffect } from "react";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import DatePicker from "@mui/lab/DatePicker";
+import TimePicker from "@mui/lab/TimePicker";
+import schema from "../../validation/formSchema.js";
+import * as yup from "yup";
+
+import {
+  Container,
+  Box,
+  Typography,
+  TextField,
+  MenuItem,
+  Slider,
+  Button,
+} from "@mui/material";
 
 // Setting pre-set options for our dropdown menus here
 const classTypes = [
@@ -26,7 +38,6 @@ const classTypes = [
   },
 ];
 const durations = [
-  "0:00",
   "0:15",
   "0:30",
   "0:45",
@@ -38,76 +49,148 @@ const durations = [
 ];
 const intensities = [1, 2, 3, 4, 5];
 
+const intensitySliderMarks = [
+  {
+    value: 1,
+    label: "1",
+  },
+  {
+    value: 2,
+    label: "2",
+  },
+  {
+    value: 3,
+    label: "3",
+  },
+  {
+    value: 4,
+    label: "4",
+  },
+  {
+    value: 5,
+    label: "5",
+  },
+];
+
+const inputStyles = {
+  margin: "0.8rem 1rem",
+};
+
+const initialFormState = {
+  className: "",
+  startTime: "",
+  classDate: "",
+  classType: "",
+  duration: "",
+  intensity: 1,
+  location: "",
+  maxCapacity: "",
+};
+
+const initialFormErrors = {
+  className: "",
+  startTime: "",
+  classDate: "",
+  classType: "",
+  duration: "",
+  intensity: "",
+  location: "",
+  maxCapacity: "",
+};
+
+const initialDisabled = true;
+
 export default function ClassForm() {
-  // Just setting states for all our inputs
-  const [className, setClassName] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [classType, setClassType] = useState("");
-  const [duration, setDuration] = useState("");
-  const [intensity, setIntensity] = useState("");
-  const [location, setLocation] = useState("");
-  const [maxCapacity, setMaxCapacity] = useState("");
+  const [formState, setFormState] = useState(initialFormState);
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
+  const [disabled, setDisabled] = useState(initialDisabled);
 
-  // Should be able to consolidate these into one change handler function; not sure how at the moment
-  const handleClassTypeChange = (event) => {
-    setClassType(event.target.value);
+  const handleChange = (event, dateOrTimeInput, name) => {
+    if (dateOrTimeInput === "true") {
+      setFormState({ ...formState, [name]: event });
+    } else {
+      validate(event.target.name, event.target.value);
+      setFormState({ ...formState, [event.target.name]: event.target.value });
+    }
   };
 
-  const handleDurationChange = (event) => {
-    setDuration(event.target.value);
-  };
-
-  const handleIntensityChange = (event) => {
-    setIntensity(event.target.value);
+  const validate = (name, value) => {
+    yup
+      .reach(schema, name)
+      .validate(value)
+      .then(() => setFormErrors({ ...formErrors, [name]: "" }))
+      .catch((error) =>
+        setFormErrors({ ...formErrors, [name]: error.errors[0] })
+      );
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    //might need to work on naming conventions here
-    const newClass = {
-      name: className,
-      type: classType,
-      startTime: startTime,
-      duration: duration,
-      level: intensity,
-      location: location,
-      registered: 0,
-      maxSize: maxCapacity,
-      // id: 0 not sure how we're setting ids here
-    };
+    console.log(formState);
     // insert POST function here
   };
 
+  Date.prototype.addDays = function (days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+  };
+
+  const date = new Date();
+
+  useEffect(() => {
+    schema.isValid(formState).then((valid) => setDisabled(!valid));
+  }, [formState]);
+
   return (
-    <div className="create-a-class-form">
+    <Container
+      component="main"
+      maxWidth="md"
+      style={{ backgroundColor: "white" }}
+    >
       {/* MUI's form div */}
       <Box
         component="form"
         sx={{
-          "& > :not(style)": { m: 1, width: "25ch" },
+          m: 2,
+          p: 3,
         }}
         noValidate
+        onSubmit={handleSubmit}
         autoComplete="off"
       >
         <Typography gutterBottom variant="h3" component="div" align="center">
           Create a Class
         </Typography>
+
         {/* Class Name Input */}
         <TextField
           id="class-name-input"
           label="Class Name"
           variant="outlined"
-          onInput={(evt) => setClassName(evt.target.value)}
+          name="className"
+          value={formState.className}
+          onChange={handleChange}
+          style={inputStyles}
+          error={!!formErrors.className}
+          helperText={formErrors.className}
         />
 
         {/* Class Type Input */}
         <TextField
           id="class-type-input"
           select
+          style={inputStyles}
           label="Class Type"
-          value={classType}
-          onChange={handleClassTypeChange}
-          helperText="Please select your class type"
+          name="classType"
+          value={formState.classType}
+          onChange={handleChange}
+          error={!!formErrors.classType}
+          helperText={
+            formErrors.classType
+              ? formErrors.classType
+              : "Please select your class type"
+          }
         >
           {/* Mapping through our pre-set dropdown menu objects/arrays */}
           {classTypes.map((option) => (
@@ -118,20 +201,54 @@ export default function ClassForm() {
         </TextField>
 
         {/* Start Time Input */}
-        <TextField
-          id="start-time-input"
-          label="Start Time"
-          variant="outlined"
-          onInput={(evt) => setStartTime(evt.target.value)}
-        />
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <TimePicker
+            label="Start Time"
+            id="start-time-input"
+            value={formState.startTime}
+            onChange={(event) => {
+              handleChange(event, "true", "startTime");
+            }}
+            style={inputStyles}
+            sx={{ m: 2 }}
+            margin="normal"
+            variant="outlined"
+            error={!!formErrors.startTime}
+            helperText={formErrors.startTime ? formErrors.startTime : null}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
+        <br></br>
+        {/* Date Input */}
+
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            label="Pick a Date"
+            style={inputStyles}
+            value={formState.classDate}
+            minDate={date.addDays(5)}
+            onChange={(event) => {
+              handleChange(event, "true", "classDate");
+            }}
+            error={!!formErrors.classDate}
+            helperText={
+              formErrors.classDate
+                ? formErrors.classDate
+                : "Must be scheduled 5 days in advance."
+            }
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </LocalizationProvider>
 
         {/* Duration Input */}
         <TextField
           id="duration-input"
           select
+          style={inputStyles}
           label="Class Duration"
-          value={duration}
-          onChange={handleDurationChange}
+          name="duration"
+          value={formState.duration}
+          onChange={handleChange}
           helperText="Please select your workout duration"
         >
           {durations.map((option) => (
@@ -142,27 +259,35 @@ export default function ClassForm() {
         </TextField>
 
         {/* Intensity Input */}
-        <TextField
+        <Typography gutterBottom variant="p" component="div" align="center">
+          Workout Intensity
+        </Typography>
+        <Slider
+          style={inputStyles}
+          aria-label="Custom marks"
+          defaultValue={1}
+          step={1}
+          valueLabelDisplay="auto"
+          marks={intensitySliderMarks}
           id="intensity-input"
-          select
           label="Workout Intensity"
-          value={intensity}
-          onChange={handleIntensityChange}
-          helperText="Please select your workout intensity"
-        >
-          {intensities.map((option) => (
-            <MenuItem key={option} value={option}>
-              {option}
-            </MenuItem>
-          ))}
-        </TextField>
+          name="intensity"
+          onChange={handleChange}
+          min={1}
+          max={5}
+        />
 
         {/* Location Input */}
         <TextField
           id="location-input"
           label="Location"
           variant="outlined"
-          onInput={(evt) => setLocation(evt.target.value)}
+          style={inputStyles}
+          name="location"
+          value={formState.location}
+          onChange={handleChange}
+          error={!!formErrors.location}
+          helperText={formErrors.location ? formErrors.location : null}
         />
 
         {/* Max Capacity Input */}
@@ -170,9 +295,25 @@ export default function ClassForm() {
           id="max-capacity-input"
           label="Max Capacity"
           variant="outlined"
-          onInput={(evt) => setMaxCapacity(evt.target.value)}
+          type="number"
+          name="maxCapacity"
+          style={inputStyles}
+          value={formState.maxCapacity}
+          onChange={handleChange}
+          error={!!formErrors.maxCapacity}
+          helperText={formErrors.maxCapacity ? formErrors.maxCapacity : null}
         />
+
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+          disabled={disabled}
+        >
+          Create Class
+        </Button>
       </Box>
-    </div>
+    </Container>
   );
 }

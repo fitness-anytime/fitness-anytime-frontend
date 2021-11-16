@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,7 +11,6 @@ import Box from "@mui/material/Box";
 
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 function Copyright(props) {
   return (
@@ -31,79 +30,80 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
+const initialFormState = {
+  email: "",
+  password: "",
+};
 
 function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  const [formState, setFormState] = useState(initialFormState);
+
+  const handleChange = (e) => {
+    setFormState({ ...formState, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formState);
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Typography component="h1" variant="h5">
-            Sign Up
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Typography component="h1" variant="h5">
+          Sign Up
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            value={formState.email}
+            autoComplete="email"
+            autoFocus
+            onChange={handleChange}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            value={formState.password}
+            autoComplete="current-password"
+            onChange={handleChange}
+          />
+
+          <FormControlLabel
+            control={<Checkbox value="true" color="primary" />}
+            label="Sign Up as an Instructor"
+          />
+
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-
-            <FormControlLabel
-              control={<Checkbox value="true" color="primary" />}
-              label="Sign Up as an Instructor"
-            />
-
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign Up
-            </Button>
-          </Box>
+            Sign Up
+          </Button>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
-    </ThemeProvider>
+      </Box>
+      <Copyright sx={{ mt: 8, mb: 4 }} />
+    </Container>
   );
 }
 

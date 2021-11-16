@@ -8,10 +8,10 @@ import IconButton from "@mui/material/IconButton";
 
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 
-export default function NavBar() {
+export default function NavBar({ isLoggedIn }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar style={{ backgroundColor: "#000000" }} position="static">
         <Toolbar>
           <IconButton
             size="large"
@@ -25,8 +25,7 @@ export default function NavBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Anywhere Fitness
           </Typography>
-          <Button color="inherit">Logout</Button>
-          {/**insert conditional - no render on login page */}
+          {isLoggedIn === true ? <Button color="inherit">Logout</Button> : ""}
         </Toolbar>
       </AppBar>
     </Box>
