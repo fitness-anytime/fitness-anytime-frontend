@@ -9,9 +9,9 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import User from "./components/User.js";
 import Instructor from "./components/instructor/Instructor";
+import ClassForm from "./components/instructor/ClassForm";
 
 import Homepage from "./components/Homepage.js";
-import ClassForm from "./components/instructor/ClassForm";
 
 function App() {
   localStorage.setItem("token", "adsfasd");
