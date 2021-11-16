@@ -4,7 +4,7 @@ https://fitness-anytime-frontend-eight.vercel.app/
 
 ## Table of contents
 
-- [Overview] (#overview)
+- [Overview] (#overview) 
   - [The App] (#the-app)
   - [Links](#links)
 - [The process](#the-process)
