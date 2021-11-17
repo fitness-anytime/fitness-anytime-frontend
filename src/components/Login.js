@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import schema from "../validation/logInSchema";
+import axios from "axios";
 import * as yup from "yup";
 
 import {
@@ -51,7 +52,7 @@ const initialFormErrors = {
 
 const initialDisabled = true;
 
-function Login() {
+function Login({ setIsLoggedIn }) {
   localStorage.setItem("token", "asdf");
 
   const [formState, setFormState] = useState(initialFormState);
@@ -75,7 +76,20 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formState);
+
+    // axios
+    //   .post(
+    //     "https://fitness-anytime-backend.herokuapp.com/api/login",
+    //     formState
+    //   )
+    //   .then((res) => {
+    //     console.log(res);
+    //     // setIsLoggedIn(true);
+    //     // localStorage.setItem("token", res.data.payload);
+    //   })
+    //   .catch(() => {
+    //     // setFormError("The email or password is incorrect");
+    //   });
   };
 
   useEffect(() => {

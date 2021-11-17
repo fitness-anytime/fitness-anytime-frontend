@@ -22,7 +22,11 @@ function App() {
       <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
 
       <Routes>
-        <Route exact path="/login" element={<Login />} />
+        <Route
+          exact
+          path="/login"
+          element={<Login setIsLoggedIn={setIsLoggedIn} />}
+        />
 
         <Route exact path="/signup" element={<SignUp />} />
 
