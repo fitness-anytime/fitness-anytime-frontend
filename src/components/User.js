@@ -116,7 +116,7 @@ const StyledCardsContainer = styled.div`
 // initializing name as default category to prevent .toLowerCase() and .includes()
 // from trying to read undefined
 const initialSearchParams = {
-  category: "initial",
+  category: "",
   value: "",
 };
 
@@ -130,45 +130,6 @@ export default function User() {
       ...searchParams,
       [event.target.name]: event.target.value,
     });
-
-    // Keep search from happening until string is entered
-    searchParams.value !== ""
-      ? classes.map((classData) => {
-          // Converting numbers to strings to use .include() method
-          let classCategoryValue = classData[category];
-          if (typeof classCategoryValue === "number") {
-            classCategoryValue = classCategoryValue.toString();
-          }
-
-          // Return and render class card only if the card contains the value inputted
-          // by the user
-          if (classCategoryValue.toLowerCase().includes(value.toLowerCase())) {
-            // not case sensitive
-            return (
-              <ClassCard
-                handleCancel={handleCancel}
-                handleReserve={handleReserve}
-                className="classCard"
-                key={classData.id}
-                isInstructor={false}
-                {...classData}
-              />
-            );
-          }
-          return null;
-        })
-      : classes.map((classData) => {
-          return (
-            <ClassCard
-              handleCancel={handleCancel}
-              handleReserve={handleReserve}
-              className="classCard"
-              key={classData.id}
-              isInstructor={false}
-              {...classData}
-            />
-          );
-        });
   };
 
   const handleReserve = () => {
@@ -233,18 +194,49 @@ export default function User() {
       </SearchBarContainer>
 
       <StyledCardsContainer>
-        {classes.map((classData) => {
-          return (
-            <ClassCard
-              handleCancel={handleCancel}
-              handleReserve={handleReserve}
-              className="classCard"
-              key={classData.id}
-              isInstructor={false}
-              {...classData}
-            />
-          );
-        })}
+        {
+          // Keep search from happening until string is entered
+          searchParams.value !== ""
+            ? classes.map((classData) => {
+                // Converting numbers to strings to use .include() method
+                let classCategoryValue = classData[category];
+                if (typeof classCategoryValue === "number") {
+                  classCategoryValue = classCategoryValue.toString();
+                }
+
+                // Return and render class card only if the card contains the value inputted
+                // by the user
+                if (
+                  classCategoryValue.toLowerCase().includes(value.toLowerCase())
+                ) {
+                  // not case sensitive
+                  return (
+                    <ClassCard
+                      handleCancel={handleCancel}
+                      handleReserve={handleReserve}
+                      className="classCard"
+                      key={classData.id}
+                      isInstructor={false}
+                      {...classData}
+                    />
+                  );
+                }
+
+                return null;
+              })
+            : classes.map((classData) => {
+                return (
+                  <ClassCard
+                    handleCancel={handleCancel}
+                    handleReserve={handleReserve}
+                    className="classCard"
+                    key={classData.id}
+                    isInstructor={false}
+                    {...classData}
+                  />
+                );
+              })
+        }
       </StyledCardsContainer>
     </>
   );
