@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
-import { IconButton, Typography, Button } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import ClassCard from "../ClassCard";
 import noClassesImg from "../../assets/noClasses.svg";
@@ -119,6 +119,13 @@ export default function Instructor(props) {
     // make a delete action to the api, update the ui based on what is returned
   };
 
+  const handleReschedule = () => {
+    console.log("we are rescheduling");
+    // pop up some type of modal
+    // get the new date and time
+    // update that classes start time on screen and on the api
+  };
+
   const handleUpdate = (id) => {
     console.log("updating class");
     // redirect to the update a class page, populate the values
@@ -155,7 +162,8 @@ export default function Instructor(props) {
         <>
           <div className="welcome-container">
             <Typography variant="h3">
-              Welcome, Instructor. Here Your Classes
+              Welcome, Instructor. <br />
+              Here Your Classes
             </Typography>
             <Button
               onClick={() => {
@@ -178,6 +186,7 @@ export default function Instructor(props) {
                 <ClassCard
                   handleDelete={handleDelete}
                   handleUpdate={handleUpdate}
+                  handleReschedule={handleReschedule}
                   key={classData.id}
                   isInstructor={true}
                   {...classData}

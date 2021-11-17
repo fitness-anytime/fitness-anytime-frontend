@@ -125,12 +125,7 @@ export default function User() {
     // Change Text to "Spot Reserved"
     // Disable the button that triggered this event
   };
-  const handleReschedule = () => {
-    console.log("we are rescheduling");
-    // pop up some type of modal
-    // get the new date and time
-    // update that classes start time on screen and on the api
-  };
+
   const handleCancel = () => {
     console.log("we are canceling our reservation");
     // update members registered on the api to be one less then it currently is
@@ -198,7 +193,6 @@ export default function User() {
             return (
               <ClassCard
                 handleCancel={handleCancel}
-                handleReschedule={handleReschedule}
                 handleReserve={handleReserve}
                 className="classCard"
                 key={classData.id}
