@@ -3,10 +3,12 @@
 https://fitness-anytime-frontend-eight.vercel.app/
 
 Default instructor:
+
 - username: lambda
 - password: school
 
 Default client:
+
 - username: apple
 - password: 123456
 
@@ -14,6 +16,7 @@ Default client:
 
 - [Overview](#overview)
   - [The App](#the-app)
+  - [Screenshot](#screenshot)
   - [Links](#links)
 - [The process](#the-process)
   - [Built with](#built-with)
@@ -38,12 +41,16 @@ Users should be able to:
 - See hover states for all interactive elements on the page
 - View each page and be able to toggle between the tabs to see new information
 
+### Screenshot
+
+![](./src/assets/AnywhereFitnessSS.png)
+
 ### Links
 
 - Assignment: https://www.notion.so/Anywhere-Fitness-fc0ac268df284aaf8db3ae1913fa3134
 - Flow Chart: https://www.figma.com/file/CSRiehufvZeC8xhpbBVMxj/Untitled?node-id=0%3A1
-- Date & Time Picker: https://mui.com/components/date-time-picker/#static-mode
 - Live Site URL: https://fitness-anytime-frontend-eight.vercel.app/
+- Date & Time Picker: https://mui.com/components/date-time-picker/#static-mode
 - Login Endpoint: https://fitness-anytime-backend.herokuapp.com/api/login
 
 ## The process
@@ -60,11 +67,10 @@ Users should be able to:
 - Semantic HTML5 markup
 - Flexbox
 - Mobile-first workflow
-- Node.js
 - MUI library
 - [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
+- [Mui](https://mui.com/) - React component library
+- [Styled Components](https://styled-components.com/) - For styled components
 
 ### What We've Learned
 
@@ -96,10 +102,10 @@ const proudOfThisFunc = () => {
 
 ### Useful resources
 
-- Figma (https://www.figma.com) - This is where we began our design, creating a flow chart to visualize every component we would need.
+- [Figma](https://www.figma.com) - This is where we began our design, creating a flow chart to visualize every component we would need.
 - VSCode live share (VSC extension) - This extension allowed our team to code together and see each other's changes in real time. Very useful!
-- Zoom (https://www.zoom.com) - Useful for daily meetings, screensharing, and team building.
-- MUI library (https://www.mui.com) - Great for styling.
+- [Zoom](https://www.zoom.com) - Useful for daily meetings, screensharing, and team building.
+- [MUI](https://www.mui.com) - Great for styling.
 
 ## Authors
 
