@@ -74,12 +74,12 @@ export default function Homepage(props) {
           fitness experience designed to help you reach your goals.
         </p>
         <p>
-          Instructors can take attendance, request and process payments, create
-          virtual “punch passes” for each type of class offered, alert clients
-          of cancellations or location changes and so much more. Clients can
-          easily find out information on classes - location, class size, start
-          time and duration, as well as reschedule or cancel an upcoming
-          appointment or reservation right from the mobile app.
+          Instructors can take attendance, create virtual “punch passes” for
+          each type of class offered, alert clients of cancellations or location
+          changes and so much more. Clients can easily find out information on
+          classes - location, class size, start time and duration, as well as
+          reschedule or cancel an upcoming appointment or reservation right from
+          the mobile app.
         </p>
       </Intro>
 

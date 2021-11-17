@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import DatePicker from "@mui/lab/DatePicker";
-import TimePicker from "@mui/lab/TimePicker";
+import { format } from "date-fns";
+
 import schema from "../../validation/formSchema.js";
 import * as yup from "yup";
 
@@ -18,7 +17,8 @@ import {
   Button,
 } from "@mui/material";
 
-import { useNavigate } from "react-router-dom";
+import { LocalizationProvider, DatePicker, TimePicker } from "@mui/lab";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
 
 // Setting pre-set options for our dropdown menus here
 const classTypes = [
@@ -74,10 +74,6 @@ const intensitySliderMarks = [
     label: "5",
   },
 ];
-
-const inputStyles = {
-  margin: "0.8rem 1rem",
-};
 
 const initialFormState = {
   className: "",
@@ -136,8 +132,8 @@ export default function UpdateClass() {
 
   const navigate = useNavigate();
 
-  const handleChange = (event, dateOrTimeInput, name) => {
-    if (dateOrTimeInput === "true") {
+  const handleChange = (event, name) => {
+    if (name === "startTime" || name === "classDate") {
       setFormState({ ...formState, [name]: event });
     } else {
       validate(event.target.name, event.target.value);
@@ -157,16 +153,14 @@ export default function UpdateClass() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formState);
-    // insert Put function here
+    const updatedClass = { ...formState };
+    updatedClass.startTime = format(updatedClass.startTime, "h:m aaa");
+    updatedClass.classDate = format(updatedClass.classDate, "PPP");
+
+    console.log(updatedClass);
+    // insert POST function here
     // redirect to the instructor page
     // make sure local state is synced with database state
-  };
-
-  Date.prototype.addDays = function (days) {
-    let date = new Date();
-    date.setDate(date.getDate() + days);
-    return date;
   };
 
   useEffect(() => {
@@ -235,7 +229,7 @@ export default function UpdateClass() {
               id="start-time-input"
               value={formState.startTime}
               onChange={(event) => {
-                handleChange(event, "true", "startTime");
+                handleChange(event, "startTime");
               }}
               variant="outlined"
               error={!!formErrors.startTime}
@@ -251,9 +245,9 @@ export default function UpdateClass() {
               label="Pick a Date"
               value={formState.classDate}
               className="MuiDatePicker"
-              minDate={new Date().addDays(5)}
+              minDate={new Date()}
               onChange={(event) => {
-                handleChange(event, "true", "classDate");
+                handleChange(event, "classDate");
               }}
               error={!!formErrors.classDate}
               helperText={
@@ -276,8 +270,10 @@ export default function UpdateClass() {
             onChange={handleChange}
             helperText="Please select your workout duration"
           >
-            {durations.map((option) => (
-              <MenuItem value={option}>{option}</MenuItem>
+            {durations.map((option, i) => (
+              <MenuItem key={i} value={option}>
+                {option}
+              </MenuItem>
             ))}
           </TextField>
 
@@ -309,7 +305,6 @@ export default function UpdateClass() {
             id="location-input"
             label="Location"
             variant="outlined"
-            style={inputStyles}
             name="location"
             value={formState.location}
             onChange={handleChange}
@@ -324,7 +319,6 @@ export default function UpdateClass() {
             variant="outlined"
             type="number"
             name="maxCapacity"
-            style={inputStyles}
             value={formState.maxCapacity}
             onChange={handleChange}
             error={!!formErrors.maxCapacity}
