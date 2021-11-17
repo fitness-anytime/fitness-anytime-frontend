@@ -29,7 +29,6 @@ export default function ClassCard(props) {
     handleUpdate,
     handleCancel,
     handleReserve,
-    handleReschedule,
     id,
   } = props;
 
@@ -78,16 +77,6 @@ export default function ClassCard(props) {
         {/* Instructor-only buttons */}
         {isInstructor ? (
           <>
-            <Button
-              onClick={() => {
-                handleReschedule(id);
-              }}
-              size="small"
-              variant="contained"
-              style={buttonStyles}
-            >
-              Reschedule
-            </Button>
             <Button
               size="small"
               onClick={() => {
