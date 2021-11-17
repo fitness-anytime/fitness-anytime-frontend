@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
-import { IconButton, Typography, Button } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import ClassCard from "../ClassCard";
 import noClassesImg from "../../assets/noClasses.svg";
@@ -115,7 +115,7 @@ const StyledInstructorContainer = styled.div`
 `;
 
 export default function Instructor(props) {
-  const [classes, setClasses] = useState(classCards);
+  const [classes] = useState(classCards);
 
   const navigate = useNavigate();
 
@@ -124,6 +124,13 @@ export default function Instructor(props) {
 
     // maybe incorp modal
     // make a delete action to the api, update the ui based on what is returned
+  };
+
+  const handleReschedule = () => {
+    console.log("we are rescheduling");
+    // pop up some type of modal
+    // get the new date and time
+    // update that classes start time on screen and on the api
   };
 
   const handleUpdate = (id) => {
@@ -185,6 +192,7 @@ export default function Instructor(props) {
                 <ClassCard
                   handleDelete={handleDelete}
                   handleUpdate={handleUpdate}
+                  handleReschedule={handleReschedule}
                   key={classData.id}
                   isInstructor={true}
                   {...classData}
