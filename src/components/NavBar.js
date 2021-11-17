@@ -32,6 +32,9 @@ export default function NavBar({ isLoggedIn, setIsLoggedIn }) {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 1.5 }}
+            onClick={() => {
+              navigate("/");
+            }}
           >
             <FitnessCenterIcon />
           </IconButton>
@@ -39,6 +42,9 @@ export default function NavBar({ isLoggedIn, setIsLoggedIn }) {
             variant="h6"
             component="div"
             sx={{ flexGrow: 1, cursor: "pointer" }}
+            onClick={() => {
+              navigate("/");
+            }}
           >
             Anywhere Fitness
           </Typography>

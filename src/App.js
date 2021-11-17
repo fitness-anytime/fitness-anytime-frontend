@@ -16,6 +16,7 @@ import ClassForm from "./components/instructor/ClassForm";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isInstructor, setIsInstructor] = useState(true);
 
   return (
     <React.Fragment>
@@ -25,7 +26,12 @@ function App() {
         <Route
           exact
           path="/login"
-          element={<Login setIsLoggedIn={setIsLoggedIn} />}
+          element={
+            <Login
+              setIsInstructor={setIsInstructor}
+              setIsLoggedIn={setIsLoggedIn}
+            />
+          }
         />
 
         <Route exact path="/signup" element={<SignUp />} />
@@ -46,7 +52,14 @@ function App() {
           <Route path="/updateclass/:id" element={<UpdateClass />} />
         </Route>
 
-        <Route exact path="/" isLoggedIn={isLoggedIn} element={<Homepage />} />
+        <Route
+          exact
+          path="/"
+          isLoggedIn={isLoggedIn}
+          element={
+            <Homepage isInstructor={isInstructor} isLoggedIn={isLoggedIn} />
+          }
+        />
       </Routes>
     </React.Fragment>
   );

@@ -61,7 +61,7 @@ const Image = styled.img`
   max-width: 40%;
 `;
 
-export default function Homepage(props) {
+export default function Homepage({ isLoggedIn, isInstructor }) {
   // Inc something so that the login button doesn't show up if you are already logged in
   const navigate = useNavigate();
 
@@ -85,22 +85,35 @@ export default function Homepage(props) {
 
       <div className="image-container">
         <ButtonContainer>
-          <Button
-            size="large"
-            onClick={() => {
-              navigate("/login");
-            }}
-          >
-            Login
-          </Button>
-          <Button
-            size="large"
-            onClick={() => {
-              navigate("/signup");
-            }}
-          >
-            Sign up
-          </Button>
+          {isLoggedIn ? (
+            <Button
+              size="large"
+              onClick={() => {
+                isInstructor ? navigate("/instructor") : navigate("/user");
+              }}
+            >
+              View Classes
+            </Button>
+          ) : (
+            <>
+              <Button
+                size="large"
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                Login
+              </Button>
+              <Button
+                size="large"
+                onClick={() => {
+                  navigate("/signup");
+                }}
+              >
+                Sign up
+              </Button>
+            </>
+          )}
         </ButtonContainer>
         <Image alt="yoga" src={yoga} />
       </div>

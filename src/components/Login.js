@@ -52,7 +52,7 @@ const initialFormErrors = {
 
 const initialDisabled = true;
 
-function Login({ setIsLoggedIn }) {
+function Login({ setIsLoggedIn, setIsInstructor }) {
   localStorage.setItem("token", "asdf");
 
   const [formState, setFormState] = useState(initialFormState);
@@ -85,6 +85,7 @@ function Login({ setIsLoggedIn }) {
     //   .then((res) => {
     //     console.log(res);
     //     // setIsLoggedIn(true);
+    //     if we return a token then setIsInstructor(true)
     //     // localStorage.setItem("token", res.data.payload);
     //   })
     //   .catch(() => {
