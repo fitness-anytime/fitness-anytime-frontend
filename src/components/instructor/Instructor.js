@@ -112,6 +112,20 @@ export default function Instructor(props) {
 
   const navigate = useNavigate();
 
+  const handleDelete = () => {
+    console.log("deleting class");
+
+    // maybe incorp modal
+    // make a delete action to the api, update the ui based on what is returned
+  };
+
+  const handleUpdate = (id) => {
+    console.log("updating class");
+    // redirect to the update a class page, populate the values
+    navigate(`/updateclass/${id}`);
+    // on click of update button, send update to api and set all classes to whatever the api returns
+  };
+
   return (
     <StyledInstructorContainer>
       {!classes && (
@@ -162,6 +176,8 @@ export default function Instructor(props) {
             {classes.map((classData) => {
               return (
                 <ClassCard
+                  handleDelete={handleDelete}
+                  handleUpdate={handleUpdate}
                   key={classData.id}
                   isInstructor={true}
                   {...classData}

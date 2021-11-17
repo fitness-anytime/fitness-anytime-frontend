@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
@@ -18,6 +17,8 @@ import {
   Slider,
   Button,
 } from "@mui/material";
+
+import { useNavigate } from "react-router-dom";
 
 // Setting pre-set options for our dropdown menus here
 const classTypes = [
@@ -126,13 +127,9 @@ const StyledFormContainer = styled.main`
     line-height: 1.66;
     letter-spacing: 0.03333em;
   }
-
-  .MuiButton-root:nth-of-type(2) {
-    background-color: #a81616;
-  }
 `;
 
-export default function ClassForm() {
+export default function UpdateClass() {
   const [formState, setFormState] = useState(initialFormState);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
@@ -161,7 +158,7 @@ export default function ClassForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formState);
-    // insert POST function here
+    // insert Put function here
     // redirect to the instructor page
     // make sure local state is synced with database state
   };
@@ -176,6 +173,12 @@ export default function ClassForm() {
     schema.isValid(formState).then((valid) => setDisabled(!valid));
   }, [formState]);
 
+  //   useEffect(() => {
+  //     //   fetch from the api based on the url id
+  //     setFormState(res.data)
+
+  //   }, [])
+
   return (
     <StyledFormContainer>
       <Container component="div" maxWidth="md">
@@ -187,7 +190,7 @@ export default function ClassForm() {
           autoComplete="off"
         >
           <Typography gutterBottom variant="h4" component="div" align="center">
-            Create a Class
+            Update your Class
           </Typography>
 
           {/* Class Name Input */}
@@ -336,7 +339,7 @@ export default function ClassForm() {
             color="success"
             disabled={disabled}
           >
-            Create Class
+            Update Class
           </Button>
           <Button
             fullWidth

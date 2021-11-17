@@ -3,6 +3,8 @@ import styled from "styled-components";
 import yoga from "../assets/yoga.svg";
 import { useNavigate } from "react-router-dom";
 
+import { Button } from "@mui/material";
+
 const Div = styled.div`
   background-color: #a81616;
 
@@ -44,23 +46,23 @@ const ButtonContainer = styled.div`
   justify-content: flex-start;
   margin-top: 5%;
   margin-right: 30%;
-  min-width: 150px;
-  max-height: 50px;
-`;
+  height: max-content;
 
-const Button = styled.button`
-  margin: 5px;
-  padding: 5px 40px;
-  color: #ffffff;
-  background-color: #000000;
-  border: 1px solid white;
+  .MuiButton-root {
+    margin: 5px;
+
+    &:hover {
+      background-color: blue;
+    }
+  }
 `;
 
 const Image = styled.img`
   max-width: 40%;
 `;
 
-export default function Homepage() {
+export default function Homepage(props) {
+  // Inc something so that the login button doesn't show up if you are already logged in
   const navigate = useNavigate();
 
   return (
@@ -83,19 +85,19 @@ export default function Homepage() {
 
       <div className="image-container">
         <ButtonContainer>
-          <Button 
+          <Button
+            size="large"
             onClick={() => {
-              navigate("/Login");
-            }} 
-            value="Login" 
+              navigate("/login");
+            }}
           >
             Login
           </Button>
-          <Button 
+          <Button
+            size="large"
             onClick={() => {
-              navigate("/SignUp");
-            }} 
-            value="sign up"
+              navigate("/signup");
+            }}
           >
             Sign up
           </Button>

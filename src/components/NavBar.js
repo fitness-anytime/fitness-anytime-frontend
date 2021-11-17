@@ -6,9 +6,22 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 
+import { useNavigate } from "react-router-dom";
+
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 
-export default function NavBar({ isLoggedIn }) {
+export default function NavBar({ isLoggedIn, setIsLoggedIn }) {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // make api update here
+
+    // remove local token
+    localStorage.removeItem("token");
+    // set isLoggedIn To false
+    setIsLoggedIn(false);
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar style={{ backgroundColor: "#000000" }} position="static">
@@ -18,14 +31,31 @@ export default function NavBar({ isLoggedIn }) {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2 }}
+            sx={{ mr: 1.5 }}
           >
             <FitnessCenterIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, cursor: "pointer" }}
+          >
             Anywhere Fitness
           </Typography>
-          {isLoggedIn === true ? <Button color="inherit">Logout</Button> : ""}
+          {isLoggedIn ? (
+            <Button onClick={handleLogout} color="inherit">
+              Logout
+            </Button>
+          ) : (
+            <Button
+              onClick={() => {
+                navigate("/login");
+              }}
+              color="inherit"
+            >
+              Login
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </Box>

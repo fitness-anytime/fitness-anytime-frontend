@@ -27,6 +27,12 @@ export default function ClassCard(props) {
     registered,
     maxSize,
     isInstructor,
+    handleDelete,
+    handleUpdate,
+    handleCancel,
+    handleReserve,
+    handleReschedule,
+    id,
   } = props;
 
   const buttonStyles = {
@@ -72,12 +78,20 @@ export default function ClassCard(props) {
       <StyledButtonsContainer>
         {isInstructor ? (
           <>
-            <Button size="small" variant="contained" style={buttonStyles}>
+            <Button
+              size="small"
+              onClick={() => {
+                handleUpdate(id);
+              }}
+              variant="contained"
+              style={buttonStyles}
+            >
               Update
             </Button>
             <Button
               color="error"
               size="small"
+              onClick={handleDelete}
               variant="contained"
               style={buttonStyles}
             >
@@ -86,13 +100,25 @@ export default function ClassCard(props) {
           </>
         ) : (
           <>
-            <Button size="small" variant="contained" style={buttonStyles}>
+            <Button
+              onClick={handleReserve}
+              size="small"
+              variant="contained"
+              color="success"
+              style={buttonStyles}
+            >
               Reserve
             </Button>
-            <Button size="small" variant="contained" style={buttonStyles}>
+            <Button
+              onClick={handleReschedule}
+              size="small"
+              variant="contained"
+              style={buttonStyles}
+            >
               Reschedule
             </Button>
             <Button
+              onClick={handleCancel}
               color="error"
               size="small"
               variant="contained"

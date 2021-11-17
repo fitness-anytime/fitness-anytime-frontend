@@ -9,18 +9,17 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import User from "./components/User.js";
 import Instructor from "./components/instructor/Instructor";
-import ClassForm from "./components/instructor/ClassForm";
-
 import Homepage from "./components/Homepage.js";
 
+import UpdateClass from "./components/instructor/UpdateClass";
+import ClassForm from "./components/instructor/ClassForm";
+
 function App() {
-  localStorage.setItem("token", "adsfasd");
-  // localStorage.removeItem("token");
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   return (
     <React.Fragment>
-      <NavBar isLoggedIn={isLoggedIn} />
+      <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
 
       <Routes>
         <Route exact path="/login" element={<Login />} />
@@ -39,7 +38,11 @@ function App() {
           <Route exact path="/createclass" element={<ClassForm />} />
         </Route>
 
-        <Route exact path="/" element={<Homepage />} />
+        <Route path="/updateclass" element={<PrivateRoute />}>
+          <Route path="/updateclass/:id" element={<UpdateClass />} />
+        </Route>
+
+        <Route exact path="/" isLoggedIn={isLoggedIn} element={<Homepage />} />
       </Routes>
     </React.Fragment>
   );
