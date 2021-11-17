@@ -46,8 +46,11 @@ Users should be able to:
 
 ### Links
 
+- Assignment: https://www.notion.so/Anywhere-Fitness-fc0ac268df284aaf8db3ae1913fa3134
 - Flow Chart: https://www.figma.com/file/CSRiehufvZeC8xhpbBVMxj/Untitled?node-id=0%3A1
+- Date & Time Picker: https://mui.com/components/date-time-picker/#static-mode
 - Live Site URL: https://fitness-anytime-frontend-eight.vercel.app/
+- Login Endpoint: https://fitness-anytime-backend.herokuapp.com/api/login
 
 ## The process
 
@@ -101,15 +104,16 @@ const proudOfThisFunc = () => {
 
 - Figma (https://www.figma.com) - This is where we began our design, creating a flow chart to visualize every component we would need.
 - VSCode live share (VSC extension) - This extension allowed our team to code together and see each other's changes in real time. Very useful!
-- Zoom (https://www.zoom.com) - Useful for daily meetings, screensharing, and team building
+- Zoom (https://www.zoom.com) - Useful for daily meetings, screensharing, and team building.
+- MUI library (https://www.mui.com) - Great for styling.
 
 ## Authors
 
-- Darla Young (https://github.com/Darla-Young)
-- Erik Bahena (https://github.com/ErikBahena)
-- Albert Brannan (https://github.com/abrannan4)
-- Aaron Reyes (https://github.com/aaronpear)
-- David Spear (https://github.com/spearoxi)
-- Brandon May (https://github.com/battleb2014)
+- Darla Young (https://github.com/Darla-Young) - Unit 2 - Styling
+- Erik Bahena (https://github.com/ErikBahena) - Unit 3 - Overall Functionality
+- Albert Brannan (https://github.com/abrannan4) - Unit 2 - Forms
+- Aaron Reyes (https://github.com/aaronpear) - Unit 2 - Forms & Search Bar
+- David Spear (https://github.com/spearoxi) - Unit 3
+- Brandon May (https://github.com/battleb2014) - Unit 4 - Backend
 
 ## Acknowledgments
