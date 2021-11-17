@@ -250,6 +250,7 @@ export default function User() {
               {...classData}
             />
           );
+
         })}
       </StyledCardsContainer>
     </>

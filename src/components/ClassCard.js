@@ -1,8 +1,6 @@
 import React from "react";
 import Card from "@mui/material/Card";
-// import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-// import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
@@ -64,6 +62,7 @@ export default function ClassCard(props) {
           color="text.secondary"
           style={{
             width: "50%",
+            whiteSpace: "no-wrap",
           }}
         >
           Start Time: {startTime} <br />
@@ -75,8 +74,19 @@ export default function ClassCard(props) {
         </Typography>
       </CardContent>
       <StyledButtonsContainer>
+        {/* Instructor-only buttons */}
         {isInstructor ? (
           <>
+            <Button
+              onClick={() => {
+                handleReschedule(id);
+              }}
+              size="small"
+              variant="contained"
+              style={buttonStyles}
+            >
+              Reschedule
+            </Button>
             <Button
               size="small"
               onClick={() => {
@@ -90,7 +100,9 @@ export default function ClassCard(props) {
             <Button
               color="error"
               size="small"
-              onClick={handleDelete}
+              onClick={() => {
+                handleDelete(id);
+              }}
               variant="contained"
               style={buttonStyles}
             >
@@ -98,9 +110,12 @@ export default function ClassCard(props) {
             </Button>
           </>
         ) : (
+          // User only buttons
           <>
             <Button
-              onClick={handleReserve}
+              onClick={() => {
+                handleReserve(id);
+              }}
               size="small"
               variant="contained"
               color="success"
@@ -108,8 +123,11 @@ export default function ClassCard(props) {
             >
               Reserve
             </Button>
+
             <Button
-              onClick={handleCancel}
+              onClick={() => {
+                handleCancel(id);
+              }}
               color="error"
               size="small"
               variant="contained"
