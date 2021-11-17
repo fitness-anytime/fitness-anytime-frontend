@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import schema from "../validation/signUpSchema";
+import * as yup from "yup";
 
 import {
   Container,
@@ -13,6 +15,7 @@ import {
 } from "@mui/material";
 
 import styled from "styled-components";
+
 
 const StyledFormContainer = styled.main`
   margin-top: 2rem;
@@ -51,10 +54,30 @@ const initialFormState = {
   password: "",
 };
 
+const initialFormErrors = {
+  email: "",
+  password: "",
+};
+
+const initialDisabled = true;
+
 function SignUp() {
   const [formState, setFormState] = useState(initialFormState);
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
+  const [disabled, setDisabled] = useState(initialDisabled);
+
+  const validate = (name, value) => {
+    yup
+      .reach(schema, name)
+      .validate(value)
+      .then(() => setFormErrors({ ...formErrors, [name]: "" }))
+      .catch((error) =>
+        setFormErrors({ ...formErrors, [name]: error.errors[0] })
+      );
+  };
 
   const handleChange = (e) => {
+    validate(e.target.name, e.target.value);
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
 
@@ -62,6 +85,11 @@ function SignUp() {
     e.preventDefault();
     console.log(formState);
   };
+  
+  useEffect(() => {
+    schema.isValid(formState).then((valid) => setDisabled(!valid));
+  }, [formState]);
+
 
   return (
     <StyledFormContainer>
@@ -95,6 +123,8 @@ function SignUp() {
               autoComplete="email"
               autoFocus
               onChange={handleChange}
+              error={!!formErrors.email}
+              helperText={formErrors.email}
             />
             <TextField
               margin="normal"
@@ -107,6 +137,8 @@ function SignUp() {
               value={formState.password}
               autoComplete="current-password"
               onChange={handleChange}
+              error={!!formErrors.password}
+              helperText={formErrors.password}
             />
 
             <FormControlLabel
@@ -119,6 +151,7 @@ function SignUp() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={disabled}
             >
               Sign Up
             </Button>
