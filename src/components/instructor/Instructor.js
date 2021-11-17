@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
@@ -51,8 +51,8 @@ const StyledInstructorContainer = styled.div`
     align-items: center;
     text-align: center;
 
-    h3 {
-      margin-top: 2%;
+    h4 {
+      margin-top: 5%;
     }
 
     button {
@@ -65,27 +65,34 @@ const StyledInstructorContainer = styled.div`
 
   .instructor-cards-container {
     display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 2rem;
   }
 
   .MuiCard-root {
-    margin-right: 2rem;
-    margin-left: 2rem;
+    margin: 0 auto;
     margin-top: 2rem;
+    flex-direction: column;
+    padding-bottom: 2rem;
+    max-width: 1500px;
+    width: 90%;
+  }
+
+  @media (min-width: 500px) {
+    .MuiCard-root {
+      flex-direction: row;
+    }
   }
 
   .no-classes-container {
     display: flex;
-
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: max-content;
     margin: 2% auto auto;
-
     text-align: center;
-
     img {
       margin-bottom: 1.5rem;
       height: auto;
@@ -109,7 +116,7 @@ const StyledInstructorContainer = styled.div`
 `;
 
 export default function Instructor(props) {
-  const [classes, setClasses] = useState(classCards);
+  const [classes] = useState(classCards);
 
   const navigate = useNavigate();
 
@@ -162,9 +169,8 @@ export default function Instructor(props) {
       {classes && (
         <>
           <div className="welcome-container">
-            <Typography variant="h3">
-              Welcome, Instructor. <br />
-              Here Your Classes
+            <Typography variant="h4">
+              Welcome, Instructor.
             </Typography>
             <Button
               onClick={() => {
@@ -178,7 +184,7 @@ export default function Instructor(props) {
               <ControlPointIcon />
             </Button>
             <Typography variant="p">
-              You have <b> {classes.length} </b> active classes
+              You have <b> {classes.length} </b> active classes:
             </Typography>
           </div>
           <div className="instructor-cards-container">

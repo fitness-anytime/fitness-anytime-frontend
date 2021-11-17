@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ClassCard from "./ClassCard";
 import styled from "styled-components";
 import { TextField, MenuItem, Typography } from "@mui/material";
@@ -45,14 +45,22 @@ const classCards = [
 const SearchBarContainer = styled.div`
   padding: 2rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  flex-wrap: wrap;
   align-items: center;
 
   h5 {
     flex-grow: 100%;
 
     margin-bottom: 1rem;
+  }
+
+  .searchMenu {
+    width: 100px;
+  }
+
+  .MuiOutlinedInput-root {
+    width: 100%;
   }
 
   .MuiTextField-root {
@@ -72,6 +80,17 @@ const SearchBarContainer = styled.div`
 
   .Mui-focused fieldset {
     border-color: white !important;
+  }
+
+  @media (min-width: 500px) {
+    flex-direction: row;
+    /* justify-content: space-evenly; */
+    margin: 5px;
+
+    .searchMenu {
+      width: 15%;
+      margin: 0 25px;
+    }
   }
 `;
 
@@ -97,12 +116,12 @@ const StyledCardsContainer = styled.div`
 // initializing name as default category to prevent .toLowerCase() and .includes()
 // from trying to read undefined
 const initialSearchParams = {
-  category: "name",
+  category: "initial",
   value: "",
 };
 
 export default function User() {
-  const [classes, setClasses] = useState(classCards);
+  const [classes] = useState(classCards);
   const [searchParams, setSearchParams] = useState(initialSearchParams);
   const { category, value } = searchParams;
 
@@ -111,6 +130,45 @@ export default function User() {
       ...searchParams,
       [event.target.name]: event.target.value,
     });
+
+    // Keep search from happening until string is entered
+    searchParams.value !== "" ?
+    classes.map((classData) => {
+      // Converting numbers to strings to use .include() method
+      let classCategoryValue = classData[category];
+      if (typeof classCategoryValue === "number") {
+        classCategoryValue = classCategoryValue.toString();
+      }
+
+      // Return and render class card only if the card contains the value inputted
+      // by the user
+      if (classCategoryValue.toLowerCase().includes(value.toLowerCase())) {
+        // not case sensitive
+        return (
+          <ClassCard
+            handleCancel={handleCancel}
+            handleReserve={handleReserve}
+            className="classCard"
+            key={classData.id}
+            isInstructor={false}
+            {...classData}
+          />
+        );
+      }
+      return null;
+    }) : 
+    classes.map((classData) => {
+      return (
+        <ClassCard
+          handleCancel={handleCancel}
+          handleReserve={handleReserve}
+          className="classCard"
+          key={classData.id}
+          isInstructor={false}
+          {...classData}
+        />
+      );
+    })
   };
 
   // Setting searchParams here to prevent string methods .toLowerCase() and .includes()
@@ -135,15 +193,17 @@ export default function User() {
     <>
       {/* Search Bar Category Selector */}
       <SearchBarContainer>
-        <Typography variant="h5">Search through the classes</Typography>
+        <Typography variant="h5">Search Classes:</Typography>
         <TextField
+          class="searchMenu"
           id="outlined-select-currency"
           select
-          label="Category"
+          label="Search By:"
           name="category"
           value={category}
           onChange={handleChange}
         >
+          <MenuItem key="initial" value="" />
           <MenuItem key="name" value="name">
             Name
           </MenuItem>
@@ -173,35 +233,23 @@ export default function User() {
           label="Search"
           variant="standard"
           name="value"
-          value={value}
+          value={searchParams.value}
           onChange={handleChange}
         />
       </SearchBarContainer>
 
       <StyledCardsContainer>
         {classes.map((classData) => {
-          // Converting numbers to strings to use .include() method
-          let classCategoryValue = classData[category];
-          if (typeof classCategoryValue === "number") {
-            classCategoryValue = classCategoryValue.toString();
-          }
-
-          // Return and render class card only if the card contains the value inputted
-          // by the user
-          if (classCategoryValue.toLowerCase().includes(value.toLowerCase())) {
-            // not case sensitive
-            return (
-              <ClassCard
-                handleCancel={handleCancel}
-                handleReserve={handleReserve}
-                className="classCard"
-                key={classData.id}
-                isInstructor={false}
-                {...classData}
-              />
-            );
-          }
-          return null;
+          return (
+            <ClassCard
+              handleCancel={handleCancel}
+              handleReserve={handleReserve}
+              className="classCard"
+              key={classData.id}
+              isInstructor={false}
+              {...classData}
+            />
+          );
         })}
       </StyledCardsContainer>
     </>
