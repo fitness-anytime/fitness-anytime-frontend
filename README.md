@@ -2,10 +2,18 @@
 
 https://fitness-anytime-frontend-eight.vercel.app/
 
+Default instructor:
+- username: lambda
+- password: school
+
+Default client:
+- username: apple
+- password: 123456
+
 ## Table of contents
 
-- [Overview] (#overview) 
-  - [The App] (#the-app)
+- [Overview](#overview)
+  - [The App](#the-app)
   - [Links](#links)
 - [The process](#the-process)
   - [Built with](#built-with)
@@ -42,8 +50,13 @@ Users should be able to:
 - Live Site URL: https://fitness-anytime-frontend-eight.vercel.app/
 
 ## The process
+
 - Built flow chart with Figma to visualize components needed
-- 
+- Created file structure to compartmentalize tasks
+- Assigned tasks to team members depending on strengths
+- Held daily meetings to pair program and regroup
+- Created basic functionality, then added style and launched
+- Connected front end to back end
 
 ### Built with
 
@@ -88,6 +101,7 @@ const proudOfThisFunc = () => {
 
 - Figma (https://www.figma.com) - This is where we began our design, creating a flow chart to visualize every component we would need.
 - VSCode live share (VSC extension) - This extension allowed our team to code together and see each other's changes in real time. Very useful!
+- Zoom (https://www.zoom.com) - Useful for daily meetings, screensharing, and team building
 
 ## Authors
 
