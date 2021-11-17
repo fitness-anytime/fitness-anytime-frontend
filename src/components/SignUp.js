@@ -16,32 +16,23 @@ import {
 
 import styled from "styled-components";
 
-
 const StyledFormContainer = styled.main`
-  margin-top: 2rem;
-
-  .MuiTypography-body2 {
-    text-decoration: underline;
-  }
-
-  input {
-    color: white;
-  }
-
   label {
-    color: white !important;
+    color: black !important;
   }
 
   .Mui-focused fieldset {
-    border-color: white !important;
+    border-color: black !important;
+  }
+
+  .MuiBox-root {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
   }
 
   .MuiCheckbox-colorPrimary {
-    color: white;
-  }
-
-  .MuiTypography-body1 {
-    color: white;
+    color: black;
   }
 
   .MuiButton-root:hover {
@@ -85,11 +76,10 @@ function SignUp() {
     e.preventDefault();
     console.log(formState);
   };
-  
+
   useEffect(() => {
     schema.isValid(formState).then((valid) => setDisabled(!valid));
   }, [formState]);
-
 
   return (
     <StyledFormContainer>

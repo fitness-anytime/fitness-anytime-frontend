@@ -99,11 +99,6 @@ const StyledInstructorContainer = styled.div`
       width: 300px;
     }
 
-    button {
-      // left here to update
-      // background-color: red;
-    }
-
     @media (max-width: 460px) {
       width: 85%;
       margin-top: 6%;
@@ -115,19 +110,19 @@ const StyledInstructorContainer = styled.div`
   }
 `;
 
-export default function Instructor(props) {
+export default function Instructor() {
   const [classes] = useState(classCards);
 
   const navigate = useNavigate();
 
-  const handleDelete = () => {
+  const handleDelete = (id) => {
     console.log("deleting class");
 
     // maybe incorp modal
     // make a delete action to the api, update the ui based on what is returned
   };
 
-  const handleReschedule = () => {
+  const handleReschedule = (id) => {
     console.log("we are rescheduling");
     // pop up some type of modal
     // get the new date and time
@@ -169,9 +164,7 @@ export default function Instructor(props) {
       {classes && (
         <>
           <div className="welcome-container">
-            <Typography variant="h4">
-              Welcome, Instructor.
-            </Typography>
+            <Typography variant="h4">Welcome, Instructor.</Typography>
             <Button
               onClick={() => {
                 navigate("/createclass");

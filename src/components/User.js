@@ -132,50 +132,44 @@ export default function User() {
     });
 
     // Keep search from happening until string is entered
-    searchParams.value !== "" ?
-    classes.map((classData) => {
-      // Converting numbers to strings to use .include() method
-      let classCategoryValue = classData[category];
-      if (typeof classCategoryValue === "number") {
-        classCategoryValue = classCategoryValue.toString();
-      }
+    searchParams.value !== ""
+      ? classes.map((classData) => {
+          // Converting numbers to strings to use .include() method
+          let classCategoryValue = classData[category];
+          if (typeof classCategoryValue === "number") {
+            classCategoryValue = classCategoryValue.toString();
+          }
 
-      // Return and render class card only if the card contains the value inputted
-      // by the user
-      if (classCategoryValue.toLowerCase().includes(value.toLowerCase())) {
-        // not case sensitive
-        return (
-          <ClassCard
-            handleCancel={handleCancel}
-            handleReserve={handleReserve}
-            className="classCard"
-            key={classData.id}
-            isInstructor={false}
-            {...classData}
-          />
-        );
-      }
-      return null;
-    }) : 
-    classes.map((classData) => {
-      return (
-        <ClassCard
-          handleCancel={handleCancel}
-          handleReserve={handleReserve}
-          className="classCard"
-          key={classData.id}
-          isInstructor={false}
-          {...classData}
-        />
-      );
-    })
+          // Return and render class card only if the card contains the value inputted
+          // by the user
+          if (classCategoryValue.toLowerCase().includes(value.toLowerCase())) {
+            // not case sensitive
+            return (
+              <ClassCard
+                handleCancel={handleCancel}
+                handleReserve={handleReserve}
+                className="classCard"
+                key={classData.id}
+                isInstructor={false}
+                {...classData}
+              />
+            );
+          }
+          return null;
+        })
+      : classes.map((classData) => {
+          return (
+            <ClassCard
+              handleCancel={handleCancel}
+              handleReserve={handleReserve}
+              className="classCard"
+              key={classData.id}
+              isInstructor={false}
+              {...classData}
+            />
+          );
+        });
   };
-
-  // Setting searchParams here to prevent string methods .toLowerCase() and .includes()
-  // from breaking by reading undefined
-  // useEffect(() => {
-  //   setSearchParams(initialSearchParams);
-  // }, []);
 
   const handleReserve = () => {
     console.log("we are reserving a spot");
@@ -195,7 +189,7 @@ export default function User() {
       <SearchBarContainer>
         <Typography variant="h5">Search Classes:</Typography>
         <TextField
-          class="searchMenu"
+          className="searchMenu"
           id="outlined-select-currency"
           select
           label="Search By:"

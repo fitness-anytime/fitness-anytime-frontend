@@ -12,6 +12,12 @@ const StyledButtonsContainer = styled.div`
   flex-flow: column;
   justify-items: flex-end;
   align-items: center;
+
+  button {
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    width: 80%;
+  }
 `;
 
 export default function ClassCard(props) {
@@ -27,16 +33,11 @@ export default function ClassCard(props) {
     isInstructor,
     handleDelete,
     handleUpdate,
+    handleReschedule,
     handleCancel,
     handleReserve,
     id,
   } = props;
-
-  const buttonStyles = {
-    padding: "0.5rem 1rem",
-    marginTop: "1rem",
-    width: "80%",
-  };
 
   return (
     <Card
@@ -80,10 +81,18 @@ export default function ClassCard(props) {
             <Button
               size="small"
               onClick={() => {
+                handleReschedule(id);
+              }}
+              variant="contained"
+            >
+              Reschedule
+            </Button>
+            <Button
+              size="small"
+              onClick={() => {
                 handleUpdate(id);
               }}
               variant="contained"
-              style={buttonStyles}
             >
               Update
             </Button>
@@ -94,7 +103,6 @@ export default function ClassCard(props) {
                 handleDelete(id);
               }}
               variant="contained"
-              style={buttonStyles}
             >
               Delete
             </Button>
@@ -109,7 +117,6 @@ export default function ClassCard(props) {
               size="small"
               variant="contained"
               color="success"
-              style={buttonStyles}
             >
               Reserve
             </Button>
@@ -121,7 +128,6 @@ export default function ClassCard(props) {
               color="error"
               size="small"
               variant="contained"
-              style={buttonStyles}
             >
               Cancel Reservation
             </Button>

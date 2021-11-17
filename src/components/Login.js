@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import schema from '../validation/logInSchema';
+import schema from "../validation/logInSchema";
 import * as yup from "yup";
 
 import {
@@ -15,26 +15,27 @@ import {
 import styled from "styled-components";
 
 const StyledFormContainer = styled.main`
-  margin-top: 2rem;
-
-  input {
-    color: white;
-  }
-
   label {
-    color: white !important;
+    color: black !important;
   }
 
   .Mui-focused fieldset {
-    border-color: white !important;
-  }
-
-  .MuiTypography-body2 {
-    text-decoration: underline;
+    border-color: black !important;
   }
 
   .MuiButton-root:hover {
     background-color: green;
+  }
+
+  .MuiBox-root {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+
+  .MuiTypography-body2 {
+    color: black;
+    text-decoration: underline;
   }
 `;
 
