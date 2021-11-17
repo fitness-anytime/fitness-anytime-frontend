@@ -38,12 +38,6 @@ Users should be able to:
 - See hover states for all interactive elements on the page
 - View each page and be able to toggle between the tabs to see new information
 
-Users should be able to:
-
-- View the optimal layout for each of the website's pages depending on their device's screen size
-- See hover states for all interactive elements on the page
-- View each page and be able to toggle between the tabs to see new information
-
 ### Links
 
 - Assignment: https://www.notion.so/Anywhere-Fitness-fc0ac268df284aaf8db3ae1913fa3134
