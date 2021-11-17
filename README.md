@@ -111,3 +111,5 @@ const proudOfThisFunc = () => {
 - Brandon May (https://github.com/battleb2014) - Unit 4 - Backend
 
 ## Acknowledgments
+
+Icons made by ultimatearm from www.flaticon.com
