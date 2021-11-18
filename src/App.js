@@ -14,8 +14,8 @@ import Homepage from "./components/Homepage.js";
 import ClassForm from "./components/instructor/ClassForm";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isInstructor, setIsInstructor] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isInstructor, setIsInstructor] = useState(true);
 
   return (
     <React.Fragment>

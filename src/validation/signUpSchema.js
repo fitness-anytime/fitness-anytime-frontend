@@ -10,7 +10,11 @@ const signUpSchema = yup.object().shape({
     .string()
     .required("Please enter a password.")
     .min(8, "Your password must be at least 8 characters long")
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/, "Must contain at least one uppercase, one lowercase, and one number."),
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/,
+      "Must contain at least one uppercase, one lowercase, and one number."
+    ),
+  instructor: yup.boolean(),
 });
 
 export default signUpSchema;

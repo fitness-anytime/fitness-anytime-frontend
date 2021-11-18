@@ -18,7 +18,7 @@ const classCards = [
     registered: 0,
     maxSize: 10,
     id: 0,
-    registeredMembers: ["Darla, Aaron, Brandon, David, Albert, Erik"],
+    registeredMembers: ["Darla", "Aaron", "Brandon", "David", "Albert", "Erik"],
   },
   {
     name: "Jazzercising With Jim",

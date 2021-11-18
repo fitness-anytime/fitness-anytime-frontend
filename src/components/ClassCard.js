@@ -3,6 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { FormControlLabel, Checkbox } from "@mui/material";
 
 import styled from "styled-components";
 
@@ -37,8 +38,10 @@ export default function ClassCard(props) {
     handleReschedule,
     handleCancel,
     handleReserve,
+    registeredMembers,
     id,
     reserved,
+    isAnyReserved,
   } = props;
 
   return (
@@ -90,6 +93,7 @@ export default function ClassCard(props) {
             >
               Reschedule
             </Button>
+
             <Button
               size="small"
               onClick={() => {
@@ -109,6 +113,15 @@ export default function ClassCard(props) {
             >
               Delete
             </Button>
+            {registeredMembers?.map((member, i) => {
+              return (
+                <FormControlLabel
+                  key={i}
+                  control={<Checkbox value="true" color="primary" />}
+                  label={member}
+                />
+              );
+            })}
           </>
         ) : // User only buttons
         reserved ? (
@@ -137,6 +150,7 @@ export default function ClassCard(props) {
             }}
             size="small"
             variant="contained"
+            disabled={isAnyReserved}
             color="success"
           >
             Reserve

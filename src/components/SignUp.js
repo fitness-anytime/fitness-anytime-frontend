@@ -43,6 +43,7 @@ const StyledFormContainer = styled.main`
 const initialFormState = {
   email: "",
   password: "",
+  instructor: false,
 };
 
 const initialFormErrors = {
@@ -68,8 +69,12 @@ function SignUp() {
   };
 
   const handleChange = (e) => {
-    validate(e.target.name, e.target.value);
-    setFormState({ ...formState, [e.target.name]: e.target.value });
+    let value = e.target.value;
+
+    if (e.target.name === "instructor") value = e.target.checked;
+
+    validate(e.target.name, value);
+    setFormState({ ...formState, [e.target.name]: value });
   };
 
   const handleSubmit = (e) => {
@@ -132,7 +137,14 @@ function SignUp() {
             />
 
             <FormControlLabel
-              control={<Checkbox value="true" color="primary" />}
+              control={
+                <Checkbox
+                  value={formState.instructor}
+                  name="instructor"
+                  color="primary"
+                  onChange={handleChange}
+                />
+              }
               label="Sign Up as an Instructor"
             />
 

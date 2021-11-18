@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ClassCard from "./ClassCard";
 import styled from "styled-components";
 import { TextField, MenuItem, Typography } from "@mui/material";
+import { previousDay } from "date-fns";
 
 const classCards = [
   {
@@ -11,19 +12,20 @@ const classCards = [
     startTime: 1700,
     duration: 60,
     level: 3,
+    reserved: false,
     location: "123 Main St.",
     registered: 0,
     maxSize: 10,
     id: 0,
   },
   {
-    reserved: true,
     name: "Jazzercising With Jim",
     type: "Aerobic",
     date: "11/22/2021",
     startTime: 900,
     duration: 60,
     level: 1,
+    reserved: false,
     location: "123 Main St.",
     registered: 0,
     maxSize: 10,
@@ -36,6 +38,7 @@ const classCards = [
     startTime: 1500,
     duration: 60,
     level: 2,
+    reserved: false,
     location: "123 Main St.",
     registered: 0,
     maxSize: 10,
@@ -122,8 +125,17 @@ const initialSearchParams = {
 };
 
 export default function User() {
-  const [classes] = useState(classCards);
+  const [classes, setClasses] = useState(
+    classCards.sort(function (a, b) {
+      if (a.reserved) return -1;
+      if (b.reserved) return 1;
+      return 0;
+    })
+  );
   const [searchParams, setSearchParams] = useState(initialSearchParams);
+  const [isAnyReserved, setAnyReserved] = useState(
+    classes.includes((classData) => classData.reserved)
+  );
   const { category, value } = searchParams;
 
   const handleChange = (event) => {
@@ -135,6 +147,12 @@ export default function User() {
 
   const handleReserve = (id) => {
     console.log("we are reserving a spot");
+    const updatedClasses = [...classes];
+    const tempClass = updatedClasses.find((element) => element.id === id);
+    tempClass.reserved = true;
+    setClasses(updatedClasses);
+    setAnyReserved(true);
+
     // filter through classes by id, make sure to do class[reserved] = true
     // update api based on new class, axios.patch/post
     // setClasses to what is returned
@@ -143,6 +161,14 @@ export default function User() {
   const handleCancel = (id) => {
     console.log("we are canceling our reservation");
     // filter through classes by id, make sure to do class[reserved] = false
+    const updatedClasses = [...classes];
+
+    updatedClasses.map((curClass) => {
+      curClass.reserved = false;
+    });
+
+    setClasses(updatedClasses);
+    setAnyReserved(false);
     // update api based on new class, axios.patch/post
     // setClasses to what is returned
     // make sure to do class[reserved] = false
@@ -218,6 +244,7 @@ export default function User() {
                   // not case sensitive
                   return (
                     <ClassCard
+                      isAnyReserved={isAnyReserved}
                       handleCancel={handleCancel}
                       handleReserve={handleReserve}
                       key={classData.id}
@@ -232,6 +259,7 @@ export default function User() {
             : classes.map((classData) => {
                 return (
                   <ClassCard
+                    isAnyReserved={isAnyReserved}
                     handleCancel={handleCancel}
                     handleReserve={handleReserve}
                     key={classData.id}
