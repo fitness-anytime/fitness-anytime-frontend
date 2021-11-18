@@ -133,16 +133,19 @@ export default function User() {
     });
   };
 
-  const handleReserve = () => {
+  const handleReserve = (id) => {
     console.log("we are reserving a spot");
-    // make api update with some id, make sure to do class[reserved] = true
-    // Change Text to "Spot Reserved"
-    // Disable the button that triggered this event
+    // filter through classes by id, make sure to do class[reserved] = true
+    // update api based on new class, axios.patch/post
+    // setClasses to what is returned
   };
 
-  const handleCancel = () => {
+  const handleCancel = (id) => {
     console.log("we are canceling our reservation");
-    // update members registered on the api to be one less then it currently is
+    // filter through classes by id, make sure to do class[reserved] = false
+    // update api based on new class, axios.patch/post
+    // setClasses to what is returned
+    // make sure to do class[reserved] = false
   };
 
   return (
