@@ -113,7 +113,10 @@ export default function ClassCard(props) {
         ) : // User only buttons
         reserved ? (
           <>
-            <Typography sx={{ mt: 3 }} variant="h6">
+            <Typography
+              sx={{ mt: 3, width: "85%", textAlign: "center" }}
+              variant="h6"
+            >
               Attending on {date} at {startTime}
             </Typography>
             <Button
