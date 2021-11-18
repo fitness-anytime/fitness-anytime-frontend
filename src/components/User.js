@@ -78,6 +78,7 @@ const SearchBarContainer = styled.div`
   svg {
     color: white !important;
   }
+
   div.MuiInput-underline::after {
     border-bottom: 2px solid white;
   }
@@ -95,6 +96,18 @@ const SearchBarContainer = styled.div`
       margin: 0 25px;
     }
   }
+`;
+
+const SimpleDiv = styled.div `
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+`;
+
+const SimpleP = styled.p `
+  margin: 0;
 `;
 
 const StyledCardsContainer = styled.div`
@@ -122,6 +135,7 @@ const initialSearchParams = {
 };
 
 export default function User() {
+  const [hasReservation, setHasReservation] = useState(false);
   const [classes, setClasses] = useState(
     classCards.sort(function (a, b) {
       if (a.reserved) return -1;
@@ -147,6 +161,7 @@ export default function User() {
     const updatedClasses = [...classes];
     const tempClass = updatedClasses.find((element) => element.id === id);
     tempClass.reserved = true;
+    setHasReservation(true);
     setClasses(updatedClasses);
     setAnyReserved(true);
 
@@ -173,52 +188,60 @@ export default function User() {
 
   return (
     <>
-      {/* Search Bar Category Selector */}
-      <SearchBarContainer>
-        <Typography variant="h5">Search Classes:</Typography>
-        <TextField
-          className="searchMenu"
-          id="outlined-select-currency"
-          select
-          label="Search By:"
-          name="category"
-          value={category}
-          onChange={handleChange}
-        >
-          <MenuItem key="initial" value="" />
-          <MenuItem key="name" value="name">
-            Name
-          </MenuItem>
-          <MenuItem key="startTime" value="startTime">
-            Time
-          </MenuItem>
-          <MenuItem key="date" value="date">
-            Date
-          </MenuItem>
-          <MenuItem key="duration" value="duration">
-            Duration
-          </MenuItem>
-          <MenuItem key="type" value="type">
-            Type
-          </MenuItem>
-          <MenuItem key="level" value="level">
-            Intensity (1-5)
-          </MenuItem>
-          <MenuItem key="location" value="location">
-            Location
-          </MenuItem>
-        </TextField>
+      {hasReservation === false ? (
+          /* Search Bar Category Selector */
+          <SearchBarContainer>
+            <Typography variant="h5">Search Classes:</Typography>
+            <TextField
+              className="searchMenu"
+              id="outlined-select-currency"
+              select
+              label="Search By:"
+              name="category"
+              value={category}
+              onChange={handleChange}
+            >
+              <MenuItem key="initial" value="" />
+              <MenuItem key="name" value="name">
+                Name
+              </MenuItem>
+              <MenuItem key="startTime" value="startTime">
+                Time
+              </MenuItem>
+              <MenuItem key="date" value="date">
+                Date
+              </MenuItem>
+              <MenuItem key="duration" value="duration">
+                Duration
+              </MenuItem>
+              <MenuItem key="type" value="type">
+                Type
+              </MenuItem>
+              <MenuItem key="level" value="level">
+                Intensity (1-5)
+              </MenuItem>
+              <MenuItem key="location" value="location">
+                Location
+              </MenuItem>
+            </TextField>
 
-        {/* Search Bar Input */}
-        <TextField
-          id="standard-basic"
-          label="Search"
-          variant="standard"
-          name="value"
-          value={searchParams.value}
-          onChange={handleChange}
-        />
-      </SearchBarContainer>
+            {/* Search Bar Input */}
+            <TextField
+              id="standard-basic"
+              label="Search"
+              variant="standard"
+              name="value"
+              value={searchParams.value}
+              onChange={handleChange}
+            />
+          </SearchBarContainer>
+       ) : (
+        <SimpleDiv>
+          <SimpleP>To attend a different class</SimpleP>
+          <SimpleP>you must first cancel your existing reservation.</SimpleP>
+        </SimpleDiv>
+       )
+      }
 
       <StyledCardsContainer>
         {
