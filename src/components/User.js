@@ -181,6 +181,7 @@ export default function User() {
 
     setClasses(updatedClasses);
     setAnyReserved(false);
+    setHasReservation(false);
     // update api based on new class, axios.patch/post
     // setClasses to what is returned
     // make sure to do class[reserved] = false
