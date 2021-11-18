@@ -161,7 +161,7 @@ export default function User() {
     const updatedClasses = [...classes];
 
     updatedClasses.map((curClass) => {
-      curClass.reserved = false;
+      return curClass.reserved = false;
     });
 
     setClasses(updatedClasses);
