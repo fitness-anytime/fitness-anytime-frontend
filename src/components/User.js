@@ -17,6 +17,7 @@ const classCards = [
     id: 0,
   },
   {
+    reserved: true,
     name: "Jazzercising With Jim",
     type: "Aerobic",
     date: "11/22/2021",
@@ -134,7 +135,7 @@ export default function User() {
 
   const handleReserve = () => {
     console.log("we are reserving a spot");
-    // make api update with some id
+    // make api update with some id, make sure to do class[reserved] = true
     // Change Text to "Spot Reserved"
     // Disable the button that triggered this event
   };
@@ -207,14 +208,15 @@ export default function User() {
                 // Return and render class card only if the card contains the value inputted
                 // by the user
                 if (
-                  classCategoryValue.toLowerCase().includes(value.toLowerCase())
+                  classCategoryValue
+                    ?.toLowerCase()
+                    .includes(value.toLowerCase())
                 ) {
                   // not case sensitive
                   return (
                     <ClassCard
                       handleCancel={handleCancel}
                       handleReserve={handleReserve}
-                      className="classCard"
                       key={classData.id}
                       isInstructor={false}
                       {...classData}
@@ -229,7 +231,6 @@ export default function User() {
                   <ClassCard
                     handleCancel={handleCancel}
                     handleReserve={handleReserve}
-                    className="classCard"
                     key={classData.id}
                     isInstructor={false}
                     {...classData}

@@ -112,7 +112,7 @@ const StyledInstructorContainer = styled.div`
 
 export default function Instructor() {
   const navigate = useNavigate();
-  const [classes, setClasses] = useState(null);
+  const [classes, setClasses] = useState(classCards);
 
   useEffect(() => {
     /*

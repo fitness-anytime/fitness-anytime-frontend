@@ -24,6 +24,7 @@ export default function ClassCard(props) {
   const {
     name,
     type,
+    date,
     startTime,
     duration,
     level,
@@ -37,6 +38,7 @@ export default function ClassCard(props) {
     handleCancel,
     handleReserve,
     id,
+    reserved,
   } = props;
 
   return (
@@ -67,6 +69,7 @@ export default function ClassCard(props) {
           }}
         >
           Start Time: {startTime} <br />
+          Date: {date} <br />
           Duration: {duration} <br />
           Level: {level} <br />
           Location: {location} <br />
@@ -107,20 +110,12 @@ export default function ClassCard(props) {
               Delete
             </Button>
           </>
-        ) : (
-          // User only buttons
+        ) : // User only buttons
+        reserved ? (
           <>
-            <Button
-              onClick={() => {
-                handleReserve(id);
-              }}
-              size="small"
-              variant="contained"
-              color="success"
-            >
-              Reserve
-            </Button>
-
+            <Typography sx={{ mt: 3 }} variant="h6">
+              Attending on {date} at {startTime}
+            </Typography>
             <Button
               onClick={() => {
                 handleCancel(id);
@@ -132,6 +127,17 @@ export default function ClassCard(props) {
               Cancel Reservation
             </Button>
           </>
+        ) : (
+          <Button
+            onClick={() => {
+              handleReserve(id);
+            }}
+            size="small"
+            variant="contained"
+            color="success"
+          >
+            Reserve
+          </Button>
         )}
       </StyledButtonsContainer>
     </Card>
