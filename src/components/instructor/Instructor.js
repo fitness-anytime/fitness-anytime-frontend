@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 import { Typography, Button } from "@mui/material";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import ClassCard from "../ClassCard";
+<<<<<<< HEAD
 import noClassesImg from "../../assets/noClasses.svg";
 
 const classCards = [
@@ -43,6 +44,9 @@ const classCards = [
     id: 2,
   },
 ];
+=======
+import noClassesImg from "../../assets/noClasses.svg"
+>>>>>>> bd4d5cf2afa42d1385f86ad68d4685b543625b95
 
 const StyledInstructorContainer = styled.div`
   .welcome-container {
@@ -110,9 +114,8 @@ const StyledInstructorContainer = styled.div`
   }
 `;
 
-export default function Instructor() {
+export default function Instructor({ classes, setClasses }) {
   const navigate = useNavigate();
-  const [classes, setClasses] = useState(classCards);
 
   useEffect(() => {
     /*

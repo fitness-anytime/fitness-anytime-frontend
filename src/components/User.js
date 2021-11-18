@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { TextField, MenuItem, Typography } from "@mui/material";
 import { previousDay } from "date-fns";
 
+<<<<<<< HEAD
 const classCards = [
   {
     name: "Pilates 101",
@@ -45,6 +46,9 @@ const classCards = [
     id: 2,
   },
 ];
+=======
+
+>>>>>>> bd4d5cf2afa42d1385f86ad68d4685b543625b95
 
 const SearchBarContainer = styled.div`
   padding: 2rem;
@@ -88,7 +92,6 @@ const SearchBarContainer = styled.div`
 
   @media (min-width: 500px) {
     flex-direction: row;
-    /* justify-content: space-evenly; */
     margin: 5px;
 
     .searchMenu {
@@ -117,13 +120,12 @@ const StyledCardsContainer = styled.div`
   }
 `;
 
-// initializing name as default category to prevent .toLowerCase() and .includes()
-// from trying to read undefined
 const initialSearchParams = {
   category: "",
   value: "",
 };
 
+<<<<<<< HEAD
 export default function User() {
   const [classes, setClasses] = useState(
     classCards.sort(function (a, b) {
@@ -132,6 +134,10 @@ export default function User() {
       return 0;
     })
   );
+=======
+export default function User({ classes, setClasses }) {
+
+>>>>>>> bd4d5cf2afa42d1385f86ad68d4685b543625b95
   const [searchParams, setSearchParams] = useState(initialSearchParams);
   const [isAnyReserved, setAnyReserved] = useState(
     classes.includes((classData) => classData.reserved)
