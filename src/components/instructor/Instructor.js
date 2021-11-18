@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
@@ -111,27 +111,35 @@ const StyledInstructorContainer = styled.div`
 `;
 
 export default function Instructor() {
-  const [classes] = useState(classCards);
-
   const navigate = useNavigate();
+  const [classes, setClasses] = useState(null);
+
+  useEffect(() => {
+    /*
+    axiosWithAuth.get(`url/classes`).then(res => {
+      setClasses(res.data)
+    })
+    */
+  }, []);
 
   const handleDelete = (id) => {
     console.log("deleting class");
-
-    // maybe incorp modal
     // make a delete action to the api, update the ui based on what is returned
+    /**
+     * axiosWithAuth.delete(`url/${id}`).then(res => {
+     * setClasses(res.data)
+     * })
+     */
   };
 
   const handleReschedule = (id) => {
     console.log("we are rescheduling");
-    // pop up some type of modal
-    // get the new date and time
+    navigate(`/rescheduleclass/${id}`);
     // update that classes start time on screen and on the api
   };
 
   const handleUpdate = (id) => {
     console.log("updating class");
-    // redirect to the update a class page, populate the values
     navigate(`/updateclass/${id}`);
     // on click of update button, send update to api and set all classes to whatever the api returns
   };
@@ -154,6 +162,7 @@ export default function Instructor() {
             }}
             fullWidth
             variant="contained"
+            color="success"
             sx={{ mt: 1, mb: 2 }}
           >
             New Class

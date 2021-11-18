@@ -64,7 +64,7 @@ While you could use several mobile apps to accomplish this, **AnywhereFitness** 
 - Semantic HTML5 markup
 - Flexbox
 - Mobile-first workflow
-- MUI library
+- [date-fns](https://date-fns.org/) - date format and date utils library.
 - [React](https://reactjs.org/) - JS library
 - [Mui](https://mui.com/) - React component library
 - [Styled Components](https://styled-components.com/) - For styled components
@@ -80,7 +80,8 @@ While you could use several mobile apps to accomplish this, **AnywhereFitness** 
 - [Figma](https://www.figma.com) - This is where we began our design, creating a flow chart to visualize every component we would need.
 - VSCode live share (VSC extension) - This extension allowed our team to code together and see each other's changes in real time. Very useful!
 - [Zoom](https://www.zoom.com) - Useful for daily meetings, screensharing, and team building.
-- [MUI](https://www.mui.com) - Great for styling.
+- [MUI](https://www.mui.com) - Great for pre-made styling, React component library.
+- [Undraw](https://undraw.co/) - "Open-source illustrations for any idea you can imagine and create"
 
 ## Authors
 

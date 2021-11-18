@@ -19,6 +19,7 @@ import {
 
 import { LocalizationProvider, DatePicker, TimePicker } from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import axios from "axios";
 
 // Setting pre-set options for our dropdown menus here
 const classTypes = [
@@ -123,13 +124,9 @@ const StyledFormContainer = styled.main`
     line-height: 1.66;
     letter-spacing: 0.03333em;
   }
-
-  .MuiButton-root:nth-of-type(2) {
-    background-color: #a81616;
-  }
 `;
 
-export default function ClassForm() {
+export default function ClassForm({ reschedule, update }) {
   const [formState, setFormState] = useState(initialFormState);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
@@ -157,19 +154,43 @@ export default function ClassForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newClass = { ...formState };
-    newClass.startTime = format(newClass.startTime, "h:m aaa");
-    newClass.classDate = format(newClass.classDate, "PPP");
 
-    console.log(newClass);
-    // insert POST function here
-    // redirect to the instructor page
-    // make sure local state is synced with database state
+    const formattedClass = { ...formState };
+    formattedClass.startTime = format(formattedClass.startTime, "h:m aaa");
+    formattedClass.classDate = format(formattedClass.classDate, "PPP");
+
+    if (!update && !reschedule) {
+      /**
+        axiosWithAuth().post(`url`, formattedClass).then(res => {
+          setClasses(res.data)
+          navigate("/instructor")
+        })
+        */
+    }
+
+    if (update || reschedule) {
+      /**
+         axiosWithAuth().patch(`url` formattedClass).then(res => {
+           setClasses(res.data)
+           navigate("/instructor")
+     }).catch(err => {})
+     */
+    }
   };
 
   useEffect(() => {
     schema.isValid(formState).then((valid) => setDisabled(!valid));
   }, [formState]);
+
+  useEffect(() => {
+    if (update || reschedule) {
+      /*
+    axios.get(`url/${id}`).then(res => {
+      setFormState(res.data)
+    })
+    */
+    }
+  }, []);
 
   return (
     <StyledFormContainer>
@@ -182,7 +203,9 @@ export default function ClassForm() {
           autoComplete="off"
         >
           <Typography gutterBottom variant="h4" component="div" align="center">
-            Create a Class
+            {reschedule && "Reschedule your Class"}
+            {update && "Update your Class"}
+            {!reschedule && !update && "Create a Class"}
           </Typography>
 
           {/* Class Name Input */}
@@ -191,6 +214,7 @@ export default function ClassForm() {
             label="Class Name"
             variant="outlined"
             name="className"
+            disabled={reschedule}
             value={formState.className}
             onChange={handleChange}
             error={!!formErrors.className}
@@ -203,6 +227,7 @@ export default function ClassForm() {
             select
             label="Class Type"
             name="classType"
+            disabled={reschedule}
             value={formState.classType}
             onChange={handleChange}
             error={!!formErrors.classType}
@@ -264,6 +289,7 @@ export default function ClassForm() {
             className="MuiTimePicker"
             label="Class Duration"
             name="duration"
+            disabled={reschedule}
             value={formState.duration}
             onChange={handleChange}
             helperText="Please select your workout duration"
@@ -288,6 +314,7 @@ export default function ClassForm() {
             aria-label="Custom marks"
             defaultValue={1}
             step={1}
+            disabled={reschedule}
             valueLabelDisplay="auto"
             marks={intensitySliderMarks}
             id="intensity-input"
@@ -317,6 +344,7 @@ export default function ClassForm() {
             variant="outlined"
             type="number"
             name="maxCapacity"
+            disabled={reschedule}
             value={formState.maxCapacity}
             onChange={handleChange}
             error={!!formErrors.maxCapacity}
@@ -331,7 +359,9 @@ export default function ClassForm() {
             color="success"
             disabled={disabled}
           >
-            Create Class
+            {reschedule && "Reschedule"}
+            {update && "Update"}
+            {!reschedule && !update && "Create"}
           </Button>
           <Button
             fullWidth

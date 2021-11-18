@@ -11,7 +11,6 @@ import User from "./components/User.js";
 import Instructor from "./components/instructor/Instructor";
 import Homepage from "./components/Homepage.js";
 
-import UpdateClass from "./components/instructor/UpdateClass";
 import ClassForm from "./components/instructor/ClassForm";
 
 function App() {
@@ -45,11 +44,42 @@ function App() {
         </Route>
 
         <Route exact path="/createclass" element={<PrivateRoute />}>
-          <Route exact path="/createclass" element={<ClassForm />} />
+          <Route
+            exact
+            path="/createclass"
+            element={
+              <ClassForm
+              // maybe
+              // setClasses={setClasses}
+              />
+            }
+          />
         </Route>
 
         <Route path="/updateclass" element={<PrivateRoute />}>
-          <Route path="/updateclass/:id" element={<UpdateClass />} />
+          <Route
+            path="/updateclass/:id"
+            element={
+              <ClassForm
+                // maybe
+                // setClasses={setClasses}
+                update={true}
+              />
+            }
+          />
+        </Route>
+
+        <Route path="/rescheduleclass" element={<PrivateRoute />}>
+          <Route
+            path="/rescheduleclass/:id"
+            element={
+              <ClassForm
+                // maybe
+                // setClasses={setClasses}
+                reschedule={true}
+              />
+            }
+          />
         </Route>
 
         <Route
