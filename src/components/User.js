@@ -3,45 +3,7 @@ import ClassCard from "./ClassCard";
 import styled from "styled-components";
 import { TextField, MenuItem, Typography } from "@mui/material";
 
-const classCards = [
-  {
-    name: "Pilates 101",
-    type: "Pilates",
-    date: "12/13/2021",
-    startTime: 1700,
-    duration: 60,
-    level: 3,
-    location: "123 Main St.",
-    registered: 0,
-    maxSize: 10,
-    id: 0,
-  },
-  {
-    reserved: true,
-    name: "Jazzercising With Jim",
-    type: "Aerobic",
-    date: "11/22/2021",
-    startTime: 900,
-    duration: 60,
-    level: 1,
-    location: "123 Main St.",
-    registered: 0,
-    maxSize: 10,
-    id: 1,
-  },
-  {
-    name: "Anywhere Fitness Karate",
-    type: "Karate",
-    date: "12/18/2021",
-    startTime: 1500,
-    duration: 60,
-    level: 2,
-    location: "123 Main St.",
-    registered: 0,
-    maxSize: 10,
-    id: 2,
-  },
-];
+
 
 const SearchBarContainer = styled.div`
   padding: 2rem;
@@ -85,7 +47,6 @@ const SearchBarContainer = styled.div`
 
   @media (min-width: 500px) {
     flex-direction: row;
-    /* justify-content: space-evenly; */
     margin: 5px;
 
     .searchMenu {
@@ -114,15 +75,13 @@ const StyledCardsContainer = styled.div`
   }
 `;
 
-// initializing name as default category to prevent .toLowerCase() and .includes()
-// from trying to read undefined
 const initialSearchParams = {
   category: "",
   value: "",
 };
 
-export default function User() {
-  const [classes] = useState(classCards);
+export default function User({ classes, setClasses }) {
+
   const [searchParams, setSearchParams] = useState(initialSearchParams);
   const { category, value } = searchParams;
 

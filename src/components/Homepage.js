@@ -62,7 +62,7 @@ const Image = styled.img`
 `;
 
 export default function Homepage({ isLoggedIn, isInstructor }) {
-  // Inc something so that the login button doesn't show up if you are already logged in
+  
   const navigate = useNavigate();
 
   return (

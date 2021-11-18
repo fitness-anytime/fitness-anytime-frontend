@@ -13,9 +13,51 @@ import Homepage from "./components/Homepage.js";
 
 import ClassForm from "./components/instructor/ClassForm";
 
+// dummy data. Remove when connected to backend.
+const classCards = [
+  {
+    name: "Pilates 101",
+    type: "Pilates",
+    date: "12/13/2021",
+    startTime: 1700,
+    duration: 60,
+    level: 3,
+    location: "123 Main St.",
+    registered: 0,
+    maxSize: 10,
+    id: 0,
+  },
+  {
+    reserved: true,
+    name: "Jazzercising With Jim",
+    type: "Aerobic",
+    date: "11/22/2021",
+    startTime: 900,
+    duration: 60,
+    level: 1,
+    location: "123 Main St.",
+    registered: 0,
+    maxSize: 10,
+    id: 1,
+  },
+  {
+    name: "Anywhere Fitness Karate",
+    type: "Karate",
+    date: "12/18/2021",
+    startTime: 1500,
+    duration: 60,
+    level: 2,
+    location: "123 Main St.",
+    registered: 0,
+    maxSize: 10,
+    id: 2,
+  },
+];
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isInstructor, setIsInstructor] = useState(false);
+  const [classes, setClasses] = useState(classCards);
 
   return (
     <React.Fragment>
@@ -36,11 +78,21 @@ function App() {
         <Route exact path="/signup" element={<SignUp />} />
 
         <Route path="/user" element={<PrivateRoute />}>
-          <Route path="/user" element={<User />} />
+          <Route path="/user" element={
+            <User 
+              classes={classes} 
+              setClasses={setClasses}
+            />
+          } />
         </Route>
 
         <Route exact path="/instructor" element={<PrivateRoute />}>
-          <Route exact path="/instructor" element={<Instructor />} />
+          <Route exact path="/instructor" element={
+            <Instructor
+              classes={classes} 
+              setClasses={setClasses}
+            />
+          } />
         </Route>
 
         <Route exact path="/createclass" element={<PrivateRoute />}>

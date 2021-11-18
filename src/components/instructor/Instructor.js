@@ -1,48 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 import { Typography, Button } from "@mui/material";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import ClassCard from "../ClassCard";
-import noClassesImg from "../../assets/noClasses.svg";
-
-const classCards = [
-  {
-    name: "Pilates 101",
-    type: "Pilates",
-    startTime: 1700,
-    duration: 60,
-    level: 3,
-    location: "123 Main St.",
-    registered: 0,
-    maxSize: 10,
-    id: 0,
-    registeredMembers: ["Darla, Aaron, Brandon, David, Albert, Erik"],
-  },
-  {
-    name: "Jazzercising With Jim",
-    type: "Aerobic",
-    startTime: 900,
-    duration: 60,
-    level: 1,
-    location: "123 Main St.",
-    registered: 0,
-    maxSize: 10,
-    id: 1,
-  },
-  {
-    name: "Anywhere Fitness Karate",
-    type: "Karate",
-    startTime: 1500,
-    duration: 60,
-    level: 2,
-    location: "123 Main St.",
-    registered: 0,
-    maxSize: 10,
-    id: 2,
-  },
-];
+import noClassesImg from "../../assets/noClasses.svg"
 
 const StyledInstructorContainer = styled.div`
   .welcome-container {
@@ -110,9 +73,8 @@ const StyledInstructorContainer = styled.div`
   }
 `;
 
-export default function Instructor() {
+export default function Instructor({ classes, setClasses }) {
   const navigate = useNavigate();
-  const [classes, setClasses] = useState(classCards);
 
   useEffect(() => {
     /*
