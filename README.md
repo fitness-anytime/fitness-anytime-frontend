@@ -39,7 +39,7 @@ While you could use several mobile apps to accomplish this, **AnywhereFitness** 
 
 ### Screenshot
 
-![](./src/assets/AnywhereFitnessSS.png)
+![](./src/assets/anywherefitnesshomepagess.png)
 
 ### Links
 
