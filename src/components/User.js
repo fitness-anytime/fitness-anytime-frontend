@@ -3,6 +3,7 @@ import ClassCard from "./ClassCard";
 import styled from "styled-components";
 import { TextField, MenuItem, Typography } from "@mui/material";
 import { previousDay } from "date-fns";
+import Dialog from './Dialog';
 
 const classCards = [
   {
@@ -218,6 +219,7 @@ export default function User() {
           value={searchParams.value}
           onChange={handleChange}
         />
+        <Dialog className="dialog" />
       </SearchBarContainer>
 
       <StyledCardsContainer>
