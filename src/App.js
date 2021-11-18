@@ -15,7 +15,7 @@ import ClassForm from "./components/instructor/ClassForm";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [isInstructor, setIsInstructor] = useState(true);
+  const [isInstructor, setIsInstructor] = useState(false);
 
   return (
     <React.Fragment>
@@ -36,17 +36,11 @@ function App() {
         <Route exact path="/signup" element={<SignUp />} />
 
         <Route path="/user" element={<PrivateRoute />}>
-          <Route path="/user" element={
-            <User 
-            />
-          } />
+          <Route path="/user" element={<User />} />
         </Route>
 
         <Route exact path="/instructor" element={<PrivateRoute />}>
-          <Route exact path="/instructor" element={
-            <Instructor
-            />
-          } />
+          <Route exact path="/instructor" element={<Instructor />} />
         </Route>
 
         <Route exact path="/createclass" element={<PrivateRoute />}>
