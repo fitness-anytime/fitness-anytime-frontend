@@ -4,12 +4,12 @@ https://fitness-anytime-frontend-eight.vercel.app/
 
 Default instructor:
 
-- username: lambda
+- email: lambda@gmail.com
 - password: school
 
-Default client:
+Default user:
 
-- username: apple
+- email: apple@gmail.com
 - password: 123456
 
 ## Table of contents
@@ -27,19 +27,15 @@ Default client:
 
 ## Overview
 
-These days, fitness classes can be held anywhere- a park, an unfinished basement or a garage- not just at a traditional gym. Certified fitness instructors need an easy way to take the awkwardness out of attendance taking and client payment processing.
+These days, fitness classes can be held anywhere- a park, an unfinished basement or a garage- not just at a traditional gym. Certified fitness instructors need an easy way to take the awkwardness out of attendance taking, and user tracking for their classes.
 
 While you could use several mobile apps to accomplish this, **AnywhereFitness** is the all-in-one solution to meet your “on-location” fitness class needs. AnywhereFitness makes it painless for Instructors and Clients alike to hold and attend Fitness classes wherever they might be held.
 
 ### The App
 
-Instructors can take attendance, request and process payments, create virtual “punch passes” for each type of class offered, alert clients of cancellations or location changes and so much more. Clients can easily find out information on classes - location, class size, start time and duration, as well as reschedule or cancel an upcoming appointment or reservation right from the mobile app.
+- Instructors can take attendance, create virtual “punch passes” for each type of class offered, alert clients of cancellations or location changes and so much more.
 
-Users should be able to:
-
-- View the optimal layout for each of the website's pages depending on their device's screen size
-- See hover states for all interactive elements on the page
-- View each page and be able to toggle between the tabs to see new information
+- Clients can easily find out information on classes - location, class size, start time and duration, as well as reschedule or cancel an upcoming appointment or reservation right from the mobile app.
 
 ### Screenshot
 
@@ -50,6 +46,7 @@ Users should be able to:
 - Assignment: https://www.notion.so/Anywhere-Fitness-fc0ac268df284aaf8db3ae1913fa3134
 - Flow Chart: https://www.figma.com/file/CSRiehufvZeC8xhpbBVMxj/Untitled?node-id=0%3A1
 - Live Site URL: https://fitness-anytime-frontend-eight.vercel.app/
+
 - Date & Time Picker: https://mui.com/components/date-time-picker/#static-mode
 - Login Endpoint: https://fitness-anytime-backend.herokuapp.com/api/login
 
@@ -72,28 +69,6 @@ Users should be able to:
 - [Mui](https://mui.com/) - React component library
 - [Styled Components](https://styled-components.com/) - For styled components
 
-### What We've Learned
-
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
-
-To see how you can add code snippets, see below:
-
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
-
-```js
-const proudOfThisFunc = () => {
-  console.log("🎉");
-};
-```
-
 ### Continued development
 
 - Link payment app
@@ -110,12 +85,10 @@ const proudOfThisFunc = () => {
 ## Authors
 
 - Darla Young (https://github.com/Darla-Young) - Unit 2 - Styling
-- Erik Bahena (https://github.com/ErikBahena) - Unit 3 - Overall Functionality
 - Albert Brannan (https://github.com/abrannan4) - Unit 2 - Forms
 - Aaron Reyes (https://github.com/aaronpear) - Unit 2 - Forms & Search Bar
 - David Spear (https://github.com/spearoxi) - Unit 3
 - Brandon May (https://github.com/battleb2014) - Unit 4 - Backend
+- Erik Bahena (https://github.com/ErikBahena) - Unit 3 - Overall Functionality/API integration
 
 ## Acknowledgments
-
-Icons made by ultimatearm from www.flaticon.com

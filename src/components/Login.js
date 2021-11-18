@@ -77,20 +77,17 @@ function Login({ setIsLoggedIn, setIsInstructor }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // axios
-    //   .post(
-    //     "https://fitness-anytime-backend.herokuapp.com/api/login",
-    //     formState
-    //   )
-    //   .then((res) => {
-    //     console.log(res);
-    //     // setIsLoggedIn(true);
-    //     if we return a token then setIsInstructor(true)
-    //     // localStorage.setItem("token", res.data.payload);
-    //   })
-    //   .catch(() => {
-    //     // setFormError("The email or password is incorrect");
-    //   });
+    console.log(formState);
+
+    axios
+      .post(
+        "https://fitness-anytime-backend.herokuapp.com/api/login",
+        formState
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch(() => {});
   };
 
   useEffect(() => {
