@@ -2,6 +2,10 @@
 
 https://anywherefitnessv1.vercel.app
 
+To access instructor view:
+
+https://anywherefitnessv1.vercel.app/instructor
+
 Default instructor:
 
 - email: lambda@gmail.com
