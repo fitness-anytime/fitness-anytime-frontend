@@ -26,6 +26,8 @@ export default function AlertDialogSlide() {
 
   // Going to use this for dialog boxes during the walkthrough to 
   // make them more visible/eye-catching
+  // Use this in the sx prop for a mild bouncing effect: 
+  // animation: `${hover} 1s infinite ease alternate`,
   const hover = keyframes`
   from {
     transform: translateY(5px);
@@ -42,9 +44,6 @@ export default function AlertDialogSlide() {
         TransitionComponent={Transition}
         hideBackdrop={false}
         aria-describedby="alert-dialog-slide-description"
-        sx={{
-            animation: `${hover} 1s infinite ease alternate`,
-        }}
       >
         <DialogTitle>{"Welcome to Anywhere Fitness"}</DialogTitle>
         <DialogContent>
