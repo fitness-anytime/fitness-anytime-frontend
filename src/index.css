@@ -28,6 +28,10 @@ button.MuiButton-root {
     margin-top: 1rem;
     width: 25%;
   }
+
+  button.MuiButton-root.navButton {
+    width: 10%;
+  }
 }
 
 label.MuiFormControlLabel-root.MuiFormControlLabel-labelPlacementEnd.formControl.css-1eix88o-MuiFormControlLabel-root {
