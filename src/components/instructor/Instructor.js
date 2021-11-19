@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import styled from "styled-components";
 import { Typography, Button } from "@mui/material";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import ClassCard from "../ClassCard";
 import noClassesImg from "../../assets/noClasses.svg";
+import InstructorWalkthrough from './InstructorWalkthrough';
+
+const firstLogin = true;
 
 const classCards = [
   {
@@ -146,6 +148,8 @@ export default function Instructor() {
 
   return (
     <StyledInstructorContainer>
+      {firstLogin ? <InstructorWalkthrough className="dialog" /> : null }
+
       {!classes && (
         <div className="no-classes-container">
           <img src={noClassesImg} alt="empty clipboard illustration" />

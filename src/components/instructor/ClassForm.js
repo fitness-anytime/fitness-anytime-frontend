@@ -20,8 +20,10 @@ import {
 import { LocalizationProvider, DatePicker, TimePicker } from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import axios from "axios";
+import ClassFormWalkthrough from "./ClassFormWalkthrough.js";
 
 // Setting pre-set options for our dropdown menus here
+const firstLogin = true;
 const classTypes = [
   {
     type: "Yoga",
@@ -208,6 +210,7 @@ export default function ClassForm({ reschedule, update }) {
 
   return (
     <StyledFormContainer>
+      {firstLogin ? <ClassFormWalkthrough className="dialog" /> : null }
       <Container component="div" maxWidth="md">
         {/* MUI's form div */}
         <Box
@@ -217,8 +220,8 @@ export default function ClassForm({ reschedule, update }) {
           autoComplete="off"
         >
           <Typography gutterBottom variant="h4" component="div" align="center">
-            {reschedule && "Reschedule your Class"}
-            {update && "Update your Class"}
+            {reschedule && "Reschedule Your Class"}
+            {update && "Update Your Class"}
             {!reschedule && !update && "Create a Class"}
           </Typography>
 
