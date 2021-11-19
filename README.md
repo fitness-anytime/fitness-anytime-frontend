@@ -1,6 +1,6 @@
 # Anywhere Fitness
 
-https://fitness-anytime-frontend-eight.vercel.app/
+https://anywherefitnessv1.vercel.app
 
 Default instructor:
 
