@@ -3,7 +3,7 @@ import ClassCard from "./ClassCard";
 import styled from "styled-components";
 import { TextField, MenuItem, Typography } from "@mui/material";
 import { previousDay } from "date-fns";
-import Dialog from './Dialog';
+import UserWalkthrough from './UserWalkthrough';
 
 const classCards = [
   {
@@ -180,7 +180,7 @@ export default function User() {
       <SearchBarContainer>
         {/* Begin onboarding walkthrough if it's the user's
         first time logging in */}
-        {firstLogin ? <Dialog className="dialog" /> : null }
+        {firstLogin ? <UserWalkthrough className="dialog" /> : null }
         
         <Typography variant="h5">Search Classes:</Typography>
         <TextField
