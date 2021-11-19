@@ -1,17 +1,14 @@
 import React, { useState } from "react";
-
 import NavBar from "./components/NavBar";
-
 import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "./routes/PrivateRoute.js";
-
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import User from "./components/User.js";
 import Instructor from "./components/instructor/Instructor";
 import Homepage from "./components/Homepage.js";
-
 import ClassForm from "./components/instructor/ClassForm";
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);

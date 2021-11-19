@@ -103,6 +103,12 @@ const initialDisabled = true;
 const StyledFormContainer = styled.main`
   margin-top: 2rem;
 
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   .MuiContainer-root {
     background-color: white;
     border-radius: 0.5rem;
@@ -123,6 +129,14 @@ const StyledFormContainer = styled.main`
 
     line-height: 1.66;
     letter-spacing: 0.03333em;
+  }
+
+  @media (min-width: 500px) {
+    div.buttons {
+      display: flex;
+      width: 100%;
+      justify-content: space-evenly;
+    }
   }
 `;
 
@@ -310,6 +324,7 @@ export default function ClassForm({ reschedule, update }) {
           >
             Workout Intensity
           </Typography>
+
           <Slider
             aria-label="Custom marks"
             defaultValue={1}
@@ -351,28 +366,32 @@ export default function ClassForm({ reschedule, update }) {
             helperText={formErrors.maxCapacity}
           />
 
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-            color="success"
-            disabled={disabled}
-          >
-            {reschedule && "Reschedule"}
-            {update && "Update"}
-            {!reschedule && !update && "Create"}
-          </Button>
-          <Button
-            fullWidth
-            variant="contained"
-            color="error"
-            onClick={() => {
-              navigate("/instructor");
-            }}
-          >
-            Cancel
-          </Button>
+          <div className="buttons">
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              color="success"
+              disabled={disabled}
+            >
+              {reschedule && "Reschedule"}
+              {update && "Update"}
+              {!reschedule && !update && "Create"}
+            </Button>
+
+            <Button
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              color="error"
+              onClick={() => {
+                navigate("/instructor");
+              }}
+            >
+              Cancel
+            </Button>
+          </div>
         </Box>
       </Container>
     </StyledFormContainer>

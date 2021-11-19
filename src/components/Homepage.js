@@ -43,17 +43,26 @@ const Intro = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  justify-content: flex-start;
-  margin-top: 5%;
-  margin-right: 30%;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  
   height: max-content;
+  width: 100%;
 
   .MuiButton-root {
     margin: 5px;
+    width: 40%;
 
     &:hover {
       background-color: blue;
     }
+  }
+
+  @media (min-width: 500px) {
+    margin-top: 5%;
+    margin-right: 30%;
+    flex-direction: row;
   }
 `;
 
