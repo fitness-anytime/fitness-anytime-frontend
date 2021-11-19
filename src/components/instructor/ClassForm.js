@@ -19,11 +19,11 @@ import {
 
 import { LocalizationProvider, DatePicker, TimePicker } from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import axios from "axios";
-import ClassFormWalkthrough from "./ClassFormWalkthrough.js";
+import { Steps } from "intro.js-react";
+import { classFormSteps } from "../walkthroughs";
 
 // Setting pre-set options for our dropdown menus here
-const firstLogin = true;
+
 const classTypes = [
   {
     type: "Yoga",
@@ -198,19 +198,23 @@ export default function ClassForm({ reschedule, update }) {
     schema.isValid(formState).then((valid) => setDisabled(!valid));
   }, [formState]);
 
-  useEffect(() => {
-    if (update || reschedule) {
-      /*
-    axios.get(`url/${id}`).then(res => {
-      setFormState(res.data)
-    })
-    */
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (update || reschedule) {
+  //     /*
+  //   axios.get(`url/${id}`).then(res => {
+  //     setFormState(res.data)
+  //   })
+  //   */
+  //   }
+  // }, []);
+
+  const setWalkedThroughClass = () => {
+    localStorage.setItem("walkedThroughClass", true);
+  };
 
   return (
-    <StyledFormContainer>
-      {firstLogin ? <ClassFormWalkthrough className="dialog" /> : null }
+    <StyledFormContainer className=".classform-page">
+      {/* {firstLogin ? <ClassFormWalkthrough className="dialog" /> : null} */}
       <Container component="div" maxWidth="md">
         {/* MUI's form div */}
         <Box
@@ -397,6 +401,12 @@ export default function ClassForm({ reschedule, update }) {
           </div>
         </Box>
       </Container>
+      <Steps
+        enabled={!localStorage.getItem("walkedThroughClass")}
+        steps={classFormSteps()}
+        initialStep={0}
+        onExit={setWalkedThroughClass}
+      />
     </StyledFormContainer>
   );
 }

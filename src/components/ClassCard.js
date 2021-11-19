@@ -25,7 +25,6 @@ const StyledButtonsContainer = styled.div`
   }
 `;
 
-
 export default function ClassCard(props) {
   const {
     name,
@@ -89,47 +88,51 @@ export default function ClassCard(props) {
         {/* Instructor-only buttons */}
         {isInstructor ? (
           <>
-            <Button
-              size="small"
-              onClick={() => {
-                handleReschedule(id);
-              }}
-              variant="contained"
-            >
-              Reschedule
-            </Button>
+            <StyledButtonsContainer className="instructor-buttons">
+              <Button
+                size="small"
+                onClick={() => {
+                  handleReschedule(id);
+                }}
+                variant="contained"
+              >
+                Reschedule
+              </Button>
 
-            <Button
-              size="small"
-              onClick={() => {
-                handleUpdate(id);
-              }}
-              variant="contained"
-            >
-              Update
-            </Button>
-            <Button
-              color="error"
-              size="small"
-              onClick={() => {
-                handleDelete(id);
-              }}
-              variant="contained"
-            >
-              Delete
-            </Button>
-            <p>Currently Registered:</p>
-            {registeredMembers?.map((member, i) => {
-              return (
-                <FormControlLabel
-                  sx={{ columnGap: 0 }}
-                  className="formControl"
-                  key={i}
-                  control={<Checkbox value="true" color="primary" />}
-                  label={member}
-                />
-              );
-            })}
+              <Button
+                size="small"
+                onClick={() => {
+                  handleUpdate(id);
+                }}
+                variant="contained"
+              >
+                Update
+              </Button>
+              <Button
+                color="error"
+                size="small"
+                onClick={() => {
+                  handleDelete(id);
+                }}
+                variant="contained"
+              >
+                Delete
+              </Button>
+            </StyledButtonsContainer>
+            <StyledButtonsContainer className="registered-members">
+              <p>Currently Registered:</p>
+              {registeredMembers?.map((member, i) => {
+                return (
+                  <FormControlLabel
+                    sx={{ columnGap: 0 }}
+                    className="formControl"
+                    key={i}
+                    control={<Checkbox value="true" color="primary" />}
+                    label={member}
+                  />
+                );
+              })}
+            </StyledButtonsContainer>
           </>
         ) : // User only buttons
         reserved ? (

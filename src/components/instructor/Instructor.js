@@ -1,50 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Typography, Button } from "@mui/material";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import ClassCard from "../ClassCard";
 import noClassesImg from "../../assets/noClasses.svg";
-import InstructorWalkthrough from './InstructorWalkthrough';
-
-const firstLogin = true;
-
-const classCards = [
-  {
-    name: "Pilates 101",
-    type: "Pilates",
-    startTime: 1700,
-    duration: 60,
-    level: 3,
-    location: "123 Main St.",
-    registered: 0,
-    maxSize: 10,
-    id: 0,
-    registeredMembers: ["Darla", "Aaron", "Brandon", "David", "Albert", "Erik"],
-  },
-  {
-    name: "Jazzercising With Jim",
-    type: "Aerobic",
-    startTime: 900,
-    duration: 60,
-    level: 1,
-    location: "123 Main St.",
-    registered: 0,
-    maxSize: 10,
-    id: 1,
-  },
-  {
-    name: "Anywhere Fitness Karate",
-    type: "Karate",
-    startTime: 1500,
-    duration: 60,
-    level: 2,
-    location: "123 Main St.",
-    registered: 0,
-    maxSize: 10,
-    id: 2,
-  },
-];
+import { Steps } from "intro.js-react";
+import { instructorSteps } from "../walkthroughs";
+import { getInstructorClasses } from "../../services";
 
 const StyledInstructorContainer = styled.div`
   .welcome-container {
@@ -52,10 +15,7 @@ const StyledInstructorContainer = styled.div`
     flex-direction: column;
     align-items: center;
     text-align: center;
-
-    h4 {
-      margin-top: 5%;
-    }
+    margin-top: 1.5%;
 
     button {
       width: 200px;
@@ -113,19 +73,21 @@ const StyledInstructorContainer = styled.div`
 `;
 
 export default function Instructor() {
-  const [classes, setClasses] = useState(classCards);
+  const [classes, setClasses] = useState(getInstructorClasses());
+
   const navigate = useNavigate();
 
-  useEffect(() => {
-    /*
-    axiosWithAuth.get(`url/classes`).then(res => {
-      setClasses(res.data)
-    })
-    */
-  }, []);
+  // useEffect(() => {
+  //   /*
+  //   axiosWithAuth.get(`url/classes`).then(res => {
+  //     setClasses(res.data)
+  //   })
+  //   */
+  // }, []);
 
   const handleDelete = (id) => {
-    console.log("deleting class");
+    const updatedClasses = [...classes].filter((element) => element.id !== id);
+    setClasses(updatedClasses);
     // make a delete action to the api, update the ui based on what is returned
     /**
      * axiosWithAuth.delete(`url/${id}`).then(res => {
@@ -135,21 +97,21 @@ export default function Instructor() {
   };
 
   const handleReschedule = (id) => {
-    console.log("we are rescheduling");
     navigate(`/rescheduleclass/${id}`);
     // update that classes start time on screen and on the api
   };
 
   const handleUpdate = (id) => {
-    console.log("updating class");
     navigate(`/updateclass/${id}`);
     // on click of update button, send update to api and set all classes to whatever the api returns
   };
 
-  return (
-    <StyledInstructorContainer>
-      {firstLogin ? <InstructorWalkthrough className="dialog" /> : null }
+  const setWalkedThroughInstructor = () => {
+    localStorage.setItem("walkedThroughInstructor", true);
+  };
 
+  return (
+    <StyledInstructorContainer className="instructor-page">
       {!classes && (
         <div className="no-classes-container">
           <img src={noClassesImg} alt="empty clipboard illustration" />
@@ -168,6 +130,7 @@ export default function Instructor() {
             variant="contained"
             color="success"
             sx={{ mt: 1, mb: 2 }}
+            className="create-button"
           >
             New Class
           </Button>
@@ -185,6 +148,7 @@ export default function Instructor() {
               fullWidth
               variant="contained"
               sx={{ mt: 2, mb: 2 }}
+              className="create-class-button"
             >
               New Class
               <ControlPointIcon />
@@ -209,6 +173,12 @@ export default function Instructor() {
           </div>
         </>
       )}
+      <Steps
+        enabled={!localStorage.getItem("walkedThroughInstructor")}
+        steps={instructorSteps()}
+        initialStep={0}
+        onExit={setWalkedThroughInstructor}
+      />
     </StyledInstructorContainer>
   );
 }

@@ -2,52 +2,10 @@ import React, { useState } from "react";
 import ClassCard from "./ClassCard";
 import styled from "styled-components";
 import { TextField, MenuItem, Typography } from "@mui/material";
-import { previousDay } from "date-fns";
-import UserWalkthrough from './UserWalkthrough';
-
-const firstLogin = true;
-
-const classCards = [
-  {
-    name: "Pilates 101",
-    type: "Pilates",
-    date: "12/13/2021",
-    startTime: 1700,
-    duration: 60,
-    level: 3,
-    reserved: false,
-    location: "123 Main St.",
-    registered: 0,
-    maxSize: 10,
-    id: 0,
-  },
-  {
-    name: "Jazzercising With Jim",
-    type: "Aerobic",
-    date: "11/22/2021",
-    startTime: 900,
-    duration: 60,
-    level: 1,
-    reserved: false,
-    location: "123 Main St.",
-    registered: 0,
-    maxSize: 10,
-    id: 1,
-  },
-  {
-    name: "Anywhere Fitness Karate",
-    type: "Karate",
-    date: "12/18/2021",
-    startTime: 1500,
-    duration: 60,
-    level: 2,
-    reserved: false,
-    location: "123 Main St.",
-    registered: 0,
-    maxSize: 10,
-    id: 2,
-  },
-];
+import { Steps } from "intro.js-react";
+import { userSteps } from "./walkthroughs/index.js";
+import { getUserClasses } from "../services";
+import { userHasReservation } from "../services";
 
 const SearchBarContainer = styled.div`
   padding: 2rem;
@@ -99,7 +57,7 @@ const SearchBarContainer = styled.div`
     }
   }
 `;
-const SimpleDiv = styled.div `
+const SimpleDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -107,7 +65,7 @@ const SimpleDiv = styled.div `
   margin-top: 20px;
 `;
 
-const SimpleP = styled.p `
+const SimpleP = styled.p`
   margin: 0;
 `;
 const StyledCardsContainer = styled.div`
@@ -134,19 +92,13 @@ const initialSearchParams = {
   value: "",
 };
 
-
 export default function User() {
-  const [classes, setClasses] = useState(
-    classCards.sort(function (a, b) {
-      if (a.reserved) return -1;
-      if (b.reserved) return 1;
-      return 0;
-    })
-  );
+  const [classes, setClasses] = useState(getUserClasses());
   const [searchParams, setSearchParams] = useState(initialSearchParams);
   const [hasReservation, setHasReservation] = useState(
-    classes.includes((classData) => classData.reserved)
+    userHasReservation(classes)
   );
+
   const { category, value } = searchParams;
 
   const handleChange = (event) => {
@@ -157,7 +109,6 @@ export default function User() {
   };
 
   const handleReserve = (id) => {
-    console.log("we are reserving a spot");
     const updatedClasses = [...classes];
     const tempClass = updatedClasses.find((element) => element.id === id);
     tempClass.reserved = true;
@@ -170,11 +121,10 @@ export default function User() {
   };
 
   const handleCancel = (id) => {
-    console.log("we are canceling our reservation");
     // filter through classes by id, make sure to do class[reserved] = false
     const updatedClasses = [...classes];
 
-    updatedClasses.map((curClass) => {
+    updatedClasses.forEach((curClass) => {
       curClass.reserved = false;
     });
 
@@ -185,66 +135,65 @@ export default function User() {
     // make sure to do class[reserved] = false
   };
 
-  return (
-    <>
-      {/* Search Bar Category Selector */}
-      {firstLogin ? <UserWalkthrough className="dialog" /> : null }
-      {hasReservation === false ? (
-      <SearchBarContainer>
-        {/* Begin onboarding walkthrough if it's the user's
-        first time logging in */}
-        
-        <Typography variant="h5">Search Classes:</Typography>
-        <TextField
-          className="searchMenu"
-          id="outlined-select-currency"
-          select
-          label="Search By:"
-          name="category"
-          value={category}
-          onChange={handleChange}
-        >
-          <MenuItem key="initial" value="" />
-          <MenuItem key="name" value="name">
-            Name
-          </MenuItem>
-          <MenuItem key="startTime" value="startTime">
-            Time
-          </MenuItem>
-          <MenuItem key="date" value="date">
-            Date
-          </MenuItem>
-          <MenuItem key="duration" value="duration">
-            Duration
-          </MenuItem>
-          <MenuItem key="type" value="type">
-            Type
-          </MenuItem>
-          <MenuItem key="level" value="level">
-            Intensity (1-5)
-          </MenuItem>
-          <MenuItem key="location" value="location">
-            Location
-          </MenuItem>
-        </TextField>
+  const setWalkedThroughUser = () => {
+    localStorage.setItem("walkedThroughUser", true);
+  };
 
-        {/* Search Bar Input */}
-        <TextField
-          id="standard-basic"
-          label="Search"
-          variant="standard"
-          name="value"
-          value={searchParams.value}
-          onChange={handleChange}
-        />
-      </SearchBarContainer>
+  return (
+    <div className="user-page">
+      {/* Search Bar Category Selector */}
+      {hasReservation === false ? (
+        <SearchBarContainer className="search-bar">
+          <Typography variant="h5">Search Classes:</Typography>
+          <TextField
+            className="searchMenu"
+            id="outlined-select-currency"
+            select
+            label="Search By:"
+            name="category"
+            value={category}
+            onChange={handleChange}
+          >
+            <MenuItem key="initial" value="" />
+            <MenuItem key="name" value="name">
+              Name
+            </MenuItem>
+            <MenuItem key="startTime" value="startTime">
+              Time
+            </MenuItem>
+            <MenuItem key="date" value="date">
+              Date
+            </MenuItem>
+            <MenuItem key="duration" value="duration">
+              Duration
+            </MenuItem>
+            <MenuItem key="type" value="type">
+              Type
+            </MenuItem>
+            <MenuItem key="level" value="level">
+              Intensity (1-5)
+            </MenuItem>
+            <MenuItem key="location" value="location">
+              Location
+            </MenuItem>
+          </TextField>
+
+          {/* Search Bar Input */}
+          <TextField
+            id="standard-basic"
+            label="Search"
+            variant="standard"
+            name="value"
+            value={searchParams.value}
+            onChange={handleChange}
+          />
+        </SearchBarContainer>
       ) : (
         <SimpleDiv>
           <SimpleP>To attend a different class</SimpleP>
           <SimpleP>you must first cancel your existing reservation.</SimpleP>
         </SimpleDiv>
-       )
-}
+      )}
 
       <StyledCardsContainer>
         {
@@ -271,6 +220,7 @@ export default function User() {
                       handleCancel={handleCancel}
                       handleReserve={handleReserve}
                       key={classData.id}
+                      className="user-card-walkthrough"
                       isInstructor={false}
                       {...classData}
                     />
@@ -282,6 +232,7 @@ export default function User() {
             : classes.map((classData) => {
                 return (
                   <ClassCard
+                    className="user-card-walkthrough"
                     isAnyReserved={hasReservation}
                     handleCancel={handleCancel}
                     handleReserve={handleReserve}
@@ -293,6 +244,12 @@ export default function User() {
               })
         }
       </StyledCardsContainer>
-    </>
+      <Steps
+        enabled={!localStorage.getItem("walkedThroughUser")}
+        steps={userSteps()}
+        initialStep={0}
+        onExit={setWalkedThroughUser}
+      />
+    </div>
   );
 }

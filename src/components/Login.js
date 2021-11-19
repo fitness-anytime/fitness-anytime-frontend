@@ -77,16 +77,12 @@ function Login({ setIsLoggedIn, setIsInstructor }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(formState);
-
     axios
       .post(
         "https://fitness-anytime-backend.herokuapp.com/api/login",
         formState
       )
-      .then((res) => {
-        console.log(res);
-      })
+      .then((res) => {})
       .catch(() => {});
   };
 
@@ -117,7 +113,7 @@ function Login({ setIsLoggedIn, setIsInstructor }) {
             component="form"
             onSubmit={handleSubmit}
             noValidate
-            sx={{ 
+            sx={{
               mt: 1,
               display: "flex",
               flexDirection: "column",
@@ -162,7 +158,7 @@ function Login({ setIsLoggedIn, setIsInstructor }) {
             >
               Login
             </Button>
-            
+
             <Link href="/signup" variant="body2">
               {"Don't have an account? Sign Up"}
             </Link>
