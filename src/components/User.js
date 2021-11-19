@@ -122,6 +122,8 @@ const initialSearchParams = {
   value: "",
 };
 
+const firstLogin = true;
+
 export default function User() {
   const [classes, setClasses] = useState(
     classCards.sort(function (a, b) {
@@ -176,6 +178,10 @@ export default function User() {
     <>
       {/* Search Bar Category Selector */}
       <SearchBarContainer>
+        {/* Begin onboarding walkthrough if it's the user's
+        first time logging in */}
+        {firstLogin ? <Dialog className="dialog" /> : null }
+        
         <Typography variant="h5">Search Classes:</Typography>
         <TextField
           className="searchMenu"
@@ -219,7 +225,6 @@ export default function User() {
           value={searchParams.value}
           onChange={handleChange}
         />
-        <Dialog className="dialog" />
       </SearchBarContainer>
 
       <StyledCardsContainer>

@@ -4,7 +4,6 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { FormControlLabel, Checkbox } from "@mui/material";
-import Dialog from './Dialog';
 
 import styled from "styled-components";
 
