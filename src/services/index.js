@@ -53,7 +53,7 @@ export const getUserClasses = () => {
       startTime: 1700,
       duration: 60,
       level: 3,
-      reserved: true,
+      reserved: false,
       location: "123 Main St.",
       registered: 0,
       maxSize: 10,
