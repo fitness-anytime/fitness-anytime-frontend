@@ -4,22 +4,27 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { FormControlLabel, Checkbox } from "@mui/material";
-
 import styled from "styled-components";
 
 const StyledButtonsContainer = styled.div`
   width: 100%;
   display: flex;
   flex-flow: column;
-  justify-items: flex-end;
+  justify-items: center;
   align-items: center;
 
   button {
     padding: 0.5rem 1rem;
     margin-top: 1rem;
-    width: 80%;
+    width: 50%;
+  }
+
+  @media (min-width: 500) {
+    justify-items: flex-end;
+    align-items: flex-start;
   }
 `;
+
 
 export default function ClassCard(props) {
   const {
@@ -113,9 +118,12 @@ export default function ClassCard(props) {
             >
               Delete
             </Button>
+            <p>Currently Registered:</p>
             {registeredMembers?.map((member, i) => {
               return (
                 <FormControlLabel
+                  sx={{ columnGap: 0 }}
+                  className="formControl"
                   key={i}
                   control={<Checkbox value="true" color="primary" />}
                   label={member}
