@@ -49,11 +49,16 @@ export default function NavBar({ isLoggedIn, setIsLoggedIn }) {
             Anywhere Fitness
           </Typography>
           {isLoggedIn ? (
-            <Button onClick={handleLogout} color="inherit">
+            <Button 
+              className="navButton"
+              onClick={handleLogout} 
+              color="inherit"
+            >
               Logout
             </Button>
           ) : (
             <Button
+            className="navButton"
               onClick={() => {
                 navigate("/login");
               }}

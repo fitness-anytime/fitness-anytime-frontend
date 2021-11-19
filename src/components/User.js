@@ -5,6 +5,8 @@ import { TextField, MenuItem, Typography } from "@mui/material";
 import { previousDay } from "date-fns";
 import UserWalkthrough from './UserWalkthrough';
 
+const firstLogin = true;
+
 const classCards = [
   {
     name: "Pilates 101",
@@ -97,7 +99,17 @@ const SearchBarContainer = styled.div`
     }
   }
 `;
+const SimpleDiv = styled.div `
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+`;
 
+const SimpleP = styled.p `
+  margin: 0;
+`;
 const StyledCardsContainer = styled.div`
   padding-bottom: 2rem;
 
@@ -122,7 +134,6 @@ const initialSearchParams = {
   value: "",
 };
 
-const firstLogin = true;
 
 export default function User() {
   const [classes, setClasses] = useState(
@@ -133,7 +144,7 @@ export default function User() {
     })
   );
   const [searchParams, setSearchParams] = useState(initialSearchParams);
-  const [isAnyReserved, setAnyReserved] = useState(
+  const [hasReservation, setHasReservation] = useState(
     classes.includes((classData) => classData.reserved)
   );
   const { category, value } = searchParams;
@@ -151,7 +162,7 @@ export default function User() {
     const tempClass = updatedClasses.find((element) => element.id === id);
     tempClass.reserved = true;
     setClasses(updatedClasses);
-    setAnyReserved(true);
+    setHasReservation(true);
 
     // filter through classes by id, make sure to do class[reserved] = true
     // update api based on new class, axios.patch/post
@@ -168,7 +179,7 @@ export default function User() {
     });
 
     setClasses(updatedClasses);
-    setAnyReserved(false);
+    setHasReservation(false);
     // update api based on new class, axios.patch/post
     // setClasses to what is returned
     // make sure to do class[reserved] = false
@@ -177,10 +188,11 @@ export default function User() {
   return (
     <>
       {/* Search Bar Category Selector */}
+      {firstLogin ? <UserWalkthrough className="dialog" /> : null }
+      {hasReservation === false ? (
       <SearchBarContainer>
         {/* Begin onboarding walkthrough if it's the user's
         first time logging in */}
-        {firstLogin ? <UserWalkthrough className="dialog" /> : null }
         
         <Typography variant="h5">Search Classes:</Typography>
         <TextField
@@ -226,6 +238,13 @@ export default function User() {
           onChange={handleChange}
         />
       </SearchBarContainer>
+      ) : (
+        <SimpleDiv>
+          <SimpleP>To attend a different class</SimpleP>
+          <SimpleP>you must first cancel your existing reservation.</SimpleP>
+        </SimpleDiv>
+       )
+}
 
       <StyledCardsContainer>
         {
@@ -248,7 +267,7 @@ export default function User() {
                   // not case sensitive
                   return (
                     <ClassCard
-                      isAnyReserved={isAnyReserved}
+                      isAnyReserved={hasReservation}
                       handleCancel={handleCancel}
                       handleReserve={handleReserve}
                       key={classData.id}
@@ -263,7 +282,7 @@ export default function User() {
             : classes.map((classData) => {
                 return (
                   <ClassCard
-                    isAnyReserved={isAnyReserved}
+                    isAnyReserved={hasReservation}
                     handleCancel={handleCancel}
                     handleReserve={handleReserve}
                     key={classData.id}

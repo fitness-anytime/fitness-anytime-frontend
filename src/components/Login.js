@@ -117,7 +117,14 @@ function Login({ setIsLoggedIn, setIsInstructor }) {
             component="form"
             onSubmit={handleSubmit}
             noValidate
-            sx={{ mt: 1 }}
+            sx={{ 
+              mt: 1,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+            }}
           >
             <TextField
               margin="normal"
@@ -155,7 +162,7 @@ function Login({ setIsLoggedIn, setIsInstructor }) {
             >
               Login
             </Button>
-
+            
             <Link href="/signup" variant="body2">
               {"Don't have an account? Sign Up"}
             </Link>
